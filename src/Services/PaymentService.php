@@ -97,6 +97,11 @@ class PaymentService
      * @var LibraryCallContract
      */
     private $libCall;
+    
+     /**
+     * @var redirectPayment
+     */
+   private $redirectPayment = ['NOVALNET_SOFORT', 'NOVALNET_PAYPAL', 'NOVALNET_IDEAL', 'NOVALNET_EPS', 'NOVALNET_GIROPAY', 'NOVALNET_PRZELEWY24'];
 
     /**
      * PaymentService Constructor.
@@ -629,7 +634,7 @@ class PaymentService
                 'Novalnet::guzzle_client',
                 ['nn_access_key' => trim($this->config->get('Novalnet.novalnet_access_key')), 'nn_request' => $serverRequestData['data'], 'nn_request_process_url' => $serverRequestData['url']] 
             );
-             if($serverRequestData['data']['transaction']['payment_type'] == 'PAYPAL') {
+             if(in_array($serverRequestData['data']['transaction']['payment_type'], $this->redirectPayment )) {
                  if (!empty($response['result']['redirect_url']) && !empty($response['transaction']['txn_secret'])) {
                         header('Location: ' . $response['result']['redirect_url']);
                         exit;
