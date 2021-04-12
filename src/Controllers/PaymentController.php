@@ -26,12 +26,16 @@ use Plenty\Plugin\Templates\Twig;
 use Novalnet\Constants\NovalnetConstants;
 use Plenty\Plugin\ConfigRepository;
 use Novalnet\Services\TransactionService;
+use Plenty\Modules\Plugin\Libs\Contracts\LibraryCallContract;
+use Plenty\Plugin\Log\Loggable;
+
 /**
  * Class PaymentController
  * @package Novalnet\Controllers
  */
 class PaymentController extends Controller
 {
+    use Loggable;
     /**
      * @var Request
      */
@@ -78,6 +82,11 @@ class PaymentController extends Controller
     private $transaction;
     
     /**
+     * @var LibraryCallContract
+     */
+    private $libCall;
+    
+    /**
      * PaymentController constructor.
      *
      * @param Request $request
@@ -98,7 +107,8 @@ class PaymentController extends Controller
                                   BasketRepositoryContract $basketRepository,             
                                   PaymentService $paymentService,
                                   TransactionService $transactionService,
-                                  Twig $twig
+                                  Twig $twig,
+                                LibraryCallContract $libCall
                                 )
     {
 
@@ -111,6 +121,7 @@ class PaymentController extends Controller
         $this->twig            = $twig;
         $this->transaction     = $transactionService;
         $this->config          = $config;
+        $this->libCall = $libCall;
     }
 
     /**
@@ -141,6 +152,7 @@ class PaymentController extends Controller
      */
     public function checksumForRedirects($response) 
     {
+        $this->getLogger(__METHOD__)->error('check sum', $response);
         // Condition to check whether the payment is redirect
         if (! empty($response['checksum']) && ! empty($response['tid']) && !empty($response['txn_secret']) && !empty($response['status'])) {
             $strRevKey = implode(array_reverse(str_split(trim($this->config->get('Novalnet.novalnet_access_key')))));
@@ -153,7 +165,11 @@ class PaymentController extends Controller
             } else {
                 $data = [];
                 $data['transaction']['tid'] = $response['tid'];
-                $responseData = $this->paymentHelper->executeCurl(json_encode($data), NovalnetConstants::TX_DETAILS_UPDATE_URL);
+                $responseData = $this->libCall->call('Novalnet::guzzle_client',
+                ['nn_access_key' => trim($this->config->get('Novalnet.novalnet_access_key')), 'nn_request' => $data, 'nn_request_process_url' => NovalnetConstants::TX_DETAILS_UPDATE_URL] 
+            );
+                 $this->getLogger(__METHOD__)->error('check sum result', $responseData);
+                //$responseData = $this->paymentHelper->executeCurl(json_encode($data), NovalnetConstants::TX_DETAILS_UPDATE_URL);
                 return $responseData;
             }
         }
