@@ -37,6 +37,7 @@
 
 {% if transactionDetails.paymentName == 'novalnet_multibanco' %}
     <div class="row">
+        <span class="col-6 col-sm-5"></span>
         <span class="col-6 col-sm-7">
               <div>{{trans("Novalnet::PaymentMethod.multibancoReferenceText")|format( transactionDetails.amount, transactionDetails.currency)}}</div> 
                <div>{{trans("Novalnet::PaymentMethod.multibancoPartnerPaymentReference")}} {{transactionDetails.multibanco_partner_ref}}</div>
