@@ -128,7 +128,7 @@ class NovalnetInstalmentbySepaPaymentMethod extends PaymentMethodBaseService
     public function getDescription(string $lang = 'de'):string
     {
         $description = trim($this->config->get('Novalnet.novalnet_instalment_sepa_description'));
-        return ($description ? $description : $this->paymentHelper->getTranslatedText('SepaPaymentDescription'));
+        return ($description ? $description : $this->paymentHelper->getTranslatedText('sepaPaymentDescription'));
     }
 
     /**
