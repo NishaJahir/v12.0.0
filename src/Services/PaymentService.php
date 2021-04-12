@@ -773,7 +773,7 @@ class PaymentService
             'plugin_version' => NovalnetConstants::PLUGIN_VERSION,
             'test_mode' => !empty($nnPaymentData['transaction']['test_mode']) ? $this->paymentHelper->getTranslatedText('testOrder',$lang) : 0,
          ];
-        if($nnPaymentData['payment_method'] == 'novalnet_invoice') {
+        if(in_array($nnPaymentData['payment_method'], ['novalnet_invoice', 'novalnet_prepayment'])) {
             if(!empty($nnPaymentData['transaction']['bank_details']) ) {
             $additionalInfo['invoice_bankname']  = $nnPaymentData['transaction']['bank_details']['bank_name'];
             $additionalInfo['invoice_bankplace'] = utf8_encode($nnPaymentData['transaction']['bank_details']['bank_place']);
@@ -784,7 +784,11 @@ class PaymentService
             $additionalInfo['due_date']     = !empty($nnPaymentData['transaction']['due_date']) ? $nnPaymentData['transaction']['due_date'] : 0;
             $additionalInfo['invoice_type'] = !empty($nnPaymentData['transaction']['payment_type']) ? $nnPaymentData['transaction']['payment_type'] : 0;
             $additionalInfo['invoice_ref']  = !empty($nnPaymentData['transaction']['invoice_ref']) ? $nnPaymentData['transaction']['invoice_ref'] : 0;
+        } elseif($nnPaymentData['payment_method'] == 'novalnet_multibanco') {
+            $additionalInfo['multibanco_partner_ref'] = $nnPaymentData['transaction']['partner_payment_reference'];
+            $additionalInfo['multibanco_supplier_id'] = $nnPaymentData['transaction']['service_supplier_id'];
         }
+        
          return $additionalInfo;
     }
     
