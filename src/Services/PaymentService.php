@@ -101,7 +101,7 @@ class PaymentService
      /**
      * @var redirectPayment
      */
-   private $redirectPayment = ['NOVALNET_SOFORT', 'NOVALNET_PAYPAL', 'NOVALNET_IDEAL', 'NOVALNET_EPS', 'NOVALNET_GIROPAY', 'NOVALNET_PRZELEWY24'];
+   private $redirectPayment = ['NOVALNET_SOFORT', 'NOVALNET_PAYPAL', 'NOVALNET_IDEAL', 'NOVALNET_EPS', 'NOVALNET_GIROPAY', 'NOVALNET_PRZELEWY24', 'NOVALNET_POSTFINANCE_CARD', 'NOVALNET_POSTFINANCE'];
 
     /**
      * PaymentService Constructor.
