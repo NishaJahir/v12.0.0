@@ -487,11 +487,24 @@ class PaymentService
     public function getTypeByPaymentKey($paymentKey) 
     {
         $payment = [
-            'NOVALNET_INVOICE'=>'INVOICE',
-            'NOVALNET_CC'=>'CREDITCARD',
-            'NOVALNET_SEPA'=>'DIRECT_DEBIT_SEPA',
-            'NOVALNET_PAYPAL'=>'PAYPAL',
-            'NOVALNET_INSTALMENT_INVOICE' => 'INSTALMENT_INVOICE'
+            'NOVALNET_SEPA' => 'DIRECT_DEBIT_SEPA',
+            'NOVALNET_CC' => 'CREDITCARD',
+            'NOVALNET_INVOICE' => 'INVOICE',
+            'NOVALNET_PREPAYMENT' => 'PREPAYMENT',
+            'NOVALNET_GUARANTEED_INVOICE' => 'GUARANTEED_INVOICE',
+            'NOVALNET_GUARANTEED_SEPA' => 'GUARANTEED_DIRECT_DEBIT_SEPA',
+            'NOVALNET_IDEAL' => 'IDEAL',
+            'NOVALNET_SOFORT' => 'ONLINE_TRANSFER',
+            'NOVALNET_CASHPAYMENT' => 'CASHPAYMENT',
+            'NOVALNET_PRZELEWY24' => 'PRZELEWY24',
+            'NOVALNET_EPS' => 'EPS',
+            'NOVALNET_INSTALMENT_INVOICE' => 'INSTALMENT_INVOICE',
+            'NOVALNET_INSTALMENT_SEPA' => 'INSTALMENT_DIRECT_DEBIT_SEPA',
+            'NOVALNET_PAYPAL' => 'PAYPAL',
+            'NOVALNET_POSTFINANCE_CARD' => 'POSTFINANCE_CARD',
+            'NOVALNET_POSTFINANCE' => 'POSTFINANCE',
+            'NOVALNET_BANCONTACT' => 'BANCONTACT',
+            'NOVALNET_MULTIBANCO' => 'MULTIBANCO',
         ];
 
         return $payment[$paymentKey];
