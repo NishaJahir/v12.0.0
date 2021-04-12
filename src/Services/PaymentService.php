@@ -643,12 +643,15 @@ class PaymentService
         try {
             $serverRequestData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
             $serverRequestData['data']['transaction']['order_no'] = $this->sessionStorage->getPlugin()->getValue('nnOrderNo');
+            $paymentKey = $this->sessionStorage->getPlugin()->getValue('paymentKey');
+            
             $this->getLogger(__METHOD__)->error('Payment Request', $serverRequestData);
+            $this->getLogger(__METHOD__)->error('Payment Key', $paymentKey);
             $response = $this->libCall->call(
                 'Novalnet::guzzle_client',
                 ['nn_access_key' => trim($this->config->get('Novalnet.novalnet_access_key')), 'nn_request' => $serverRequestData['data'], 'nn_request_process_url' => $serverRequestData['url']] 
             );
-             if(in_array($serverRequestData['data']['transaction']['payment_type'], $this->redirectPayment )) {
+             if(in_array($paymentKey, $this->redirectPayment )) {
                  if (!empty($response['result']['redirect_url']) && !empty($response['transaction']['txn_secret'])) {
                         header('Location: ' . $response['result']['redirect_url']);
                         exit;
