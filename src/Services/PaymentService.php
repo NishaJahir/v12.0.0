@@ -855,6 +855,7 @@ class PaymentService
                     }
                 }
             }
+            $this->getLogger(__METHOD__)->error( 'getTransactionCommentVal' ,$transactionDetails);
             return ['bankDetails' => $bankDetails, 'transactionDetails' => $transactionDetails];
         }  
         return '';       
