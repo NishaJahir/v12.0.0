@@ -538,7 +538,7 @@ class PaymentService
             if(is_numeric($invoiceDueDate)) {
                 $paymentRequestParameters['transaction']['due_date'] = $this->paymentHelper->getPaymentDueDate($invoiceDueDate);
             }
-        } elseif ($paymentKey == 'NOVALNET_PAYPAL') {
+        } elseif (in_array($paymentKey, $this->redirectPayment )) {
             $paymentRequestParameters['transaction']['return_url'] = $paymentRequestParameters['transaction']['error_return_url'] = $this->getReturnPageUrl();
         }
         return $onHoldPaymentUrl;
@@ -643,6 +643,7 @@ class PaymentService
         try {
             $serverRequestData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
             $serverRequestData['data']['transaction']['order_no'] = $this->sessionStorage->getPlugin()->getValue('nnOrderNo');
+            $this->getLogger(__METHOD__)->error('Payment Request', $serverRequestData);
             $response = $this->libCall->call(
                 'Novalnet::guzzle_client',
                 ['nn_access_key' => trim($this->config->get('Novalnet.novalnet_access_key')), 'nn_request' => $serverRequestData['data'], 'nn_request_process_url' => $serverRequestData['url']] 
@@ -667,6 +668,8 @@ class PaymentService
                     $this->pushNotification($notificationMessage, 'error', 100);
                 }
             }
+            
+           $this->getLogger(__METHOD__)->error('Payment Response', $response);
         } catch (\Exception $e) {
                 $this->getLogger(__METHOD__)->error('Novalnet::performServerCall', $e);
         }
