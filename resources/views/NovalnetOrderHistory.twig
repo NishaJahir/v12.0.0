@@ -21,7 +21,7 @@
         </span>
 </div>
     
-{% if bankDetails.payment_id == 96 %}
+{% if transactionDetails.paymentName == 'novalnet_instalment_invoice' %}
         <br><div class="row" id="nnInstalmentDetails">
                 <strong class="col-6 col-sm-5">{{trans("Novalnet::PaymentMethod.instalmentInfo")}}</strong>
                 <span class="col-6 col-sm-7">
@@ -35,4 +35,14 @@
 {% endif %}
 {% endif %}
 
+{% if transactionDetails.paymentName == 'novalnet_multibanco' %}
+    <div class="row">
+        <span class="col-6 col-sm-7">
+              <div>{{trans("Novalnet::PaymentMethod.multibancoReferenceText")|format( transactionDetails.amount, transactionDetails.currency)}}</div> 
+               <div>{{trans("Novalnet::PaymentMethod.multibancoPartnerPaymentReference")}} {{transactionDetails.multibanco_partner_ref}}</div>
+                <div>{{trans("Novalnet::PaymentMethod.multibancoSupplierId")}} {{transactionDetails.multibanco_supplier_id}}</div>
+        </span>
+    </div>
+
+{% endif %}
 
