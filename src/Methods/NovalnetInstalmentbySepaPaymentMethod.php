@@ -111,11 +111,11 @@ class NovalnetInstalmentbySepaPaymentMethod extends PaymentMethodBaseService
     public function getIcon(string $lang = 'de'):string
     {
         $logoUrl = $this->config->get('Novalnet.novalnet_instalment_sepa_payment_logo');
-        if($logoUrl == 'images/novalnet_instalment_sepa.png')
+        if($logoUrl == 'images/novalnet_sepa.png')
         {
             /** @var Application $app */
             $app = pluginApp(Application::class);
-            $logoUrl = $app->getUrlPath('novalnet') .'/images/novalnet_instalment_sepa.png';
+            $logoUrl = $app->getUrlPath('novalnet') .'/images/novalnet_sepa.png';
         }
         return $logoUrl;
     }
@@ -128,7 +128,7 @@ class NovalnetInstalmentbySepaPaymentMethod extends PaymentMethodBaseService
     public function getDescription(string $lang = 'de'):string
     {
         $description = trim($this->config->get('Novalnet.novalnet_instalment_sepa_description'));
-        return ($description ? $description : $this->paymentHelper->getTranslatedText('instalmentSepaPaymentDescription'));
+        return ($description ? $description : $this->paymentHelper->getTranslatedText('SepaPaymentDescription'));
     }
 
     /**
