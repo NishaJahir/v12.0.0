@@ -128,7 +128,7 @@ class NovalnetGuaranteedInvoicePaymentMethod extends PaymentMethodBaseService
     public function getDescription(string $lang = 'de'):string
     {
         $description = trim($this->config->get('Novalnet.novalnet_guaranteed_invoice_description'));
-        return ($description ? $description : $this->paymentHelper->getTranslatedText('guaranteed_invoicePrepaymentPaymentDescription'));
+        return ($description ? $description : $this->paymentHelper->getTranslatedText('invoicePrepaymentPaymentDescription'));
     }
 
     /**
