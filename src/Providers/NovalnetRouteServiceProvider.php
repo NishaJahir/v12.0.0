@@ -33,7 +33,7 @@ class NovalnetRouteServiceProvider extends RouteServiceProvider
     {
         // Get the additional requested URL's for the Novalnet payment process
         $router->post('payment/novalnet/processPayment', 'Novalnet\Controllers\PaymentController@processPayment');
-        $router->match(['post', 'get'], 'payment/novalnet/paymentResponse', 'Novalnet\Controllers\PaymentController@paymentResponse');
+        $router->get('payment/novalnet/paymentResponse', 'Novalnet\Controllers\PaymentController@paymentResponse');
         $router->post('payment/novalnet/removePaymentDetails', 'Novalnet\Controllers\PaymentController@removePaymentDetails');
         $router->match(['post', 'get'], 'payment/novalnet/callback', 'Novalnet\Controllers\WebhookController@processCallback');
     }
