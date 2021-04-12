@@ -69,7 +69,7 @@ class CreateAndUpdatePaymentMethods
         $this->createNovalnetPaymentMethodByPaymentKey('NOVALNET_INSTALMENT_INVOICE', 'Novalnet Instalment Invoice');
         $this->createNovalnetPaymentMethodByPaymentKey('NOVALNET_INSTALMENT_SEPA', 'Novalnet Instalment Direct Debit SEPA');
         $this->createNovalnetPaymentMethodByPaymentKey('NOVALNET_PAYPAL', 'Novalnet PayPal');
-        $this->createNovalnetPaymentMethodByPaymentKey('NOVALNET_POSTFINACE_CARD', 'Novalnet PostFinance Card');
+        $this->createNovalnetPaymentMethodByPaymentKey('NOVALNET_POSTFINANCE_CARD', 'Novalnet PostFinance Card');
         $this->createNovalnetPaymentMethodByPaymentKey('NOVALNET_POSTFINANCE', 'Novalnet PostFinance E-Finance');
         $this->createNovalnetPaymentMethodByPaymentKey('NOVALNET_BANCONTACT', 'Novalnet Bancontact');
         $this->createNovalnetPaymentMethodByPaymentKey('NOVALNET_MULTIBANCO', 'Novalnet Multibanco');
