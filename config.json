@@ -1149,7 +1149,7 @@
                "required":false,
                "label":"Config.paymentLogoLabel",
                "options":{  
-                  "defaultValue":"images/novalnet_przelewy.png"
+                  "defaultValue":"images/novalnet_przelewy24.png"
                }
             },
             "novalnet_przelewy24_minimum_order_amount":{  
