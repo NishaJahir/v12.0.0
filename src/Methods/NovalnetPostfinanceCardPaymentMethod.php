@@ -128,7 +128,7 @@ class NovalnetPostfinanceCardPaymentMethod extends PaymentMethodBaseService
     public function getDescription(string $lang = 'de'):string
     {
         $description = trim($this->config->get('Novalnet.novalnet_postfinance_card_description'));
-        return ($description ? $description : $this->paymentHelper->getTranslatedText('postfinanceCardPaymentDescription'));
+        return ($description ? $description : $this->paymentHelper->getTranslatedText('postfinancePaymentDescription'));
     }
 
     /**
