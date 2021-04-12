@@ -1120,7 +1120,7 @@
                   "defaultValue":false
                }
             },
-            "novalnet_przelewy_test_mode":{  
+            "novalnet_przelewy24_test_mode":{  
                "type":"checkBox",
                "required":false,
                "label":"Config.testModeLabel",
@@ -1128,7 +1128,7 @@
                   "defaultValue":false
                }
             },
-            "novalnet_przelewy_payment_name":{  
+            "novalnet_przelewy24_payment_name":{  
                "type":"inputText",
                "required":false,
                "label":"Config.paymentNameLabel",
@@ -1136,7 +1136,7 @@
                   "defaultValue":""
                }
             },
-            "novalnet_przelewy_description":{  
+            "novalnet_przelewy24_description":{  
                "type":"inputText",
                "required":false,
                "label":"Config.paymentDescriptionLabel",
@@ -1144,7 +1144,7 @@
                   "defaultValue":""
                }
             },
-            "novalnet_przelewy_payment_logo":{  
+            "novalnet_przelewy24_payment_logo":{  
                "type":"inputFile",
                "required":false,
                "label":"Config.paymentLogoLabel",
@@ -1152,7 +1152,7 @@
                   "defaultValue":"images/novalnet_przelewy.png"
                }
             },
-            "novalnet_przelewy_minimum_order_amount":{  
+            "novalnet_przelewy24_minimum_order_amount":{  
                "type":"inputText",
                "required":false,
                "label":"Config.minimumOrderAmountLabel",
@@ -1161,7 +1161,7 @@
                   "defaultValue":""
                }
             },
-            "novalnet_przelewy_maximum_order_amount":{  
+            "novalnet_przelewy24_maximum_order_amount":{  
                "type":"inputText",
                "required":false,
                "label":"Config.maximumOrderAmountLabel",
@@ -1170,7 +1170,7 @@
                   "defaultValue":""
                }
             },
-            "novalnet_przelewy_allowed_country":{  
+            "novalnet_przelewy24_allowed_country":{  
                "type":"inputText",
                "required":false,
                "label":"Config.allowedCountryLabel",
