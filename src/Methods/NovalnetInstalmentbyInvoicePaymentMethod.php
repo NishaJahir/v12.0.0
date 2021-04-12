@@ -86,12 +86,12 @@ class NovalnetInstalmentbyInvoicePaymentMethod extends PaymentMethodBaseService
             }
             $paymentDisplay = true;
             $paymentConditionValidation = $this->paymentService->checkPaymentDisplayConditions($this->basket, 'novalnet_instalment_invoice');
-            $this->getLogger(__METHOD__)->error('condn payment', $paymentConditionValidation);
+          
             if($paymentConditionValidation == false) {
                 $paymentDisplay = false;
             }
             
-            $this->getLogger(__METHOD__)->error('newly condn added', $paymentDisplay);
+           
             return (bool)($this->paymentService->isPaymentActive($this->basket, 'novalnet_instalment_invoice') && $instalmentPaymentMimimumAmount && $paymentDisplay);
         }
         return false;
