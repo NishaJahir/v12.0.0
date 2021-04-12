@@ -1112,7 +1112,7 @@
       "Config.NovalnetPrzelewy24Tab":{  
          "label":"Config.NovalnetPrzelewy24Tab",
          "formFields":{  
-            "novalnet_przelewy_payment_active":{  
+            "novalnet_przelewy24_payment_active":{  
                "type":"checkBox",
                "required":false,
                "label":"Config.paymentActiveLabel",
