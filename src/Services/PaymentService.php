@@ -713,15 +713,11 @@ class PaymentService
         try {
             $nnPaymentData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', null);
-            $paymentDetails = $this->paymentHelper->getPaymentMethodByKey($paymentKey);
-            $this->getLogger(__METHOD__)->error('payment Details',  $paymentDetails);
-            $nnPaymentData['mop']            = $this->sessionStorage->getPlugin()->getValue('mop');
-        
-            $nnPaymentData['payment_method'] = (!empty($nnPaymentData['mop'])) ? strtolower($this->paymentHelper->getPaymentKeyByMop($nnPaymentData['mop'])) : $nnPaymentData['payment_key'];
-           
-            // if ($nnPaymentData['transaction']['payment_type'] == 'PAYPAL') {
-            // $nnPaymentData['payment_method'] = 'novalnet_paypal';
-           // }
+            $novalnetPlentyPayment = $this->paymentHelper->getPaymentMethodByKey($paymentKey);
+            
+            $nnPaymentData['mop']            = $novalnetPlentyPayment[1];
+            $nnPaymentData['payment_method'] = strtolower($this->paymentHelper->getPaymentKeyByMop($nnPaymentData['mop']));
+            
             $additionalInfo = $this->additionalInfo($nnPaymentData);
         
             if($nnPaymentData['payment_method'] == 'INSTALMENT_INVOICE') {
