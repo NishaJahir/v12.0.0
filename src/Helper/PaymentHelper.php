@@ -347,8 +347,21 @@ class PaymentHelper
             'DIRECT_DEBIT_SEPA'  => 'novalnet_sepa',
             'CREDITCARD'   => 'novalnet_cc',
             'INVOICE'  => 'novalnet_invoice',
+            'PREPAYMENT'  => 'novalnet_prepayment',
+            'GUARANTEED_INVOICE'  => 'novalnet_sepa',
+            'GUARANTEED_DIRECT_DEBIT_SEPA'  => 'novalnet_guaranteed_sepa',
+            'IDEAL'  => 'novalnet_ideal',
+            'ONLINE_TRANSFER'  => 'novalnet_sofort',
+            'CASHPAYMENT'  => 'novalnet_cashpayment',
+            'PRZELEWY24'  => 'novalnet_przelewy24',
+            'EPS'  => 'novalnet_eps',
+            'INSTALMENT_INVOICE'  => 'novalnet_sepa',
+            'INSTALMENT_DIRECT_DEBIT_SEPA'  => 'novalnet_instalment_sepa',
             'PAYPAL'  => 'novalnet_paypal',
-            'INSTALMENT_INVOICE'  => 'novalnet_instalment_invoice'
+            'POSTFINANCE_CARD'  => 'novalnet_postfinance_card',
+            'POSTFINANCE'  => 'novalnet_postfinance',
+            'BANCONTACT'  => 'novalnet_bancontact',
+            'MULTIBANCO'  => 'novalnet_multibanco'
         ];
         return $paymentMethodName[$paymentKey];
     }
