@@ -646,9 +646,6 @@ class PaymentService
             $paymentKey = $this->sessionStorage->getPlugin()->getValue('paymentKey');
             $mop = $this->sessionStorage->getPlugin()->getValue('mop');
             
-            $this->getLogger(__METHOD__)->error('Payment Request', $serverRequestData);
-            $this->getLogger(__METHOD__)->error('Payment Key', $paymentKey);
-              $this->getLogger(__METHOD__)->error('Payment Key', $mop);
             $response = $this->libCall->call(
                 'Novalnet::guzzle_client',
                 ['nn_access_key' => trim($this->config->get('Novalnet.novalnet_access_key')), 'nn_request' => $serverRequestData['data'], 'nn_request_process_url' => $serverRequestData['url']] 
@@ -717,8 +714,8 @@ class PaymentService
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', null);
             $novalnetPlentyPayment = $this->paymentHelper->getPaymentMethodByKey($paymentKey);
             
-            $nnPaymentData['mop']            = $novalnetPlentyPayment[1];
-            $nnPaymentData['payment_method'] = strtolower($this->paymentHelper->getPaymentKeyByMop($nnPaymentData['mop']));
+            $nnPaymentData['mop']            = $novalnetPlentyPayment[0];
+            $nnPaymentData['payment_method'] = strtolower($novalnetPlentyPayment[1]);
             
             $additionalInfo = $this->additionalInfo($nnPaymentData);
         
