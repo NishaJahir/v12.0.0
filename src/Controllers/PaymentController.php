@@ -140,7 +140,7 @@ class PaymentController extends Controller
             $this->paymentService->pushNotification($responseData['status_text'], 'error', 100);    
         }
         $paymentRequestParameters = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
-        $paymentRequestParameters['payment_key'] = 'novalnet_paypal';
+       // $paymentRequestParameters['payment_key'] = 'novalnet_paypal';
         $this->sessionStorage->getPlugin()->setValue('nnPaymentData', array_merge($paymentRequestParameters, $responseData));
         $this->paymentService->validatePaymentResponse();
         return $this->response->redirectTo('confirmation');
@@ -152,7 +152,6 @@ class PaymentController extends Controller
      */
     public function checksumForRedirects($response) 
     {
-        $this->getLogger(__METHOD__)->error('check sum', $response);
         // Condition to check whether the payment is redirect
         if (! empty($response['checksum']) && ! empty($response['tid']) && !empty($response['txn_secret']) && !empty($response['status'])) {
             $strRevKey = implode(array_reverse(str_split(trim($this->config->get('Novalnet.novalnet_access_key')))));
@@ -168,7 +167,7 @@ class PaymentController extends Controller
                 $responseData = $this->libCall->call('Novalnet::guzzle_client',
                 ['nn_access_key' => trim($this->config->get('Novalnet.novalnet_access_key')), 'nn_request' => $data, 'nn_request_process_url' => NovalnetConstants::TX_DETAILS_UPDATE_URL] 
             );
-                 $this->getLogger(__METHOD__)->error('check sum result', $responseData);
+                 
                 //$responseData = $this->paymentHelper->executeCurl(json_encode($data), NovalnetConstants::TX_DETAILS_UPDATE_URL);
                 return $responseData;
             }
