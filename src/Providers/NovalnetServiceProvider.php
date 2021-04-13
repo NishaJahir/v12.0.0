@@ -293,7 +293,7 @@ class NovalnetServiceProvider extends ServiceProvider
                     $paymentKey = $paymentHelper->getPaymentKeyByMop($event->getMop());
                     $sessionStorage->getPlugin()->setValue('paymentKey',$paymentKey);
                     $paymentService->performServerCall();
-                    $paymentService->validatePaymentResponse($paymentKey);
+                    //$paymentService->validatePaymentResponse($paymentKey);
                 }
             });
         
