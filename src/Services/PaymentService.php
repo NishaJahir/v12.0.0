@@ -713,10 +713,14 @@ class PaymentService
         try {
             $nnPaymentData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', null);
-
+    $key = $this->sessionStorage->getPlugin()->getValue('paymentKey');
+            $order = $this->sessionStorage->getPlugin()->getValue('nnOrderNo');
             $nnPaymentData['mop']            = $this->sessionStorage->getPlugin()->getValue('mop');
             $this->getLogger(__METHOD__)->error('validate mop',  $nnPaymentData['mop']);
             $this->getLogger(__METHOD__)->error('validate response',  $nnPaymentData);
+            $this->getLogger(__METHOD__)->error('validate order',  $order);
+            $this->getLogger(__METHOD__)->error('validate key',  $key);
+            $this->getLogger(__METHOD__)->error('validate key',  $this->sessionStorage->getPlugin()->getValue('mopId'));
             $nnPaymentData['payment_method'] = (!empty($nnPaymentData['mop'])) ? strtolower($this->paymentHelper->getPaymentKeyByMop($nnPaymentData['mop'])) : $nnPaymentData['payment_key'];
             $this->getLogger(__METHOD__)->error('validate payment name',  $nnPaymentData['payment_method']);
             // if ($nnPaymentData['transaction']['payment_type'] == 'PAYPAL') {
