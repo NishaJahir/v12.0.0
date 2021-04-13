@@ -672,6 +672,8 @@ class PaymentService
                 } else {
                     $this->pushNotification($notificationMessage, 'error', 100);
                 }
+                 
+                $this->validatePaymentResponse($paymentKey);
             }
             
            $this->getLogger(__METHOD__)->error('Payment Response', $response);
