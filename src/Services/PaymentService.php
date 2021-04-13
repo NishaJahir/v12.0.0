@@ -709,14 +709,14 @@ class PaymentService
      * Validate the payment response data
      *
      */
-    public function validatePaymentResponse($paymentKey) {
+    public function validatePaymentResponse() {
         try {
             $nnPaymentData = $this->sessionStorage->getPlugin()->getValue('nnPaymentData');
             $this->sessionStorage->getPlugin()->setValue('nnPaymentData', null);
-            $paymentDetails = $this->paymentHelper->getPaymentMethodByKey($paymentKey);
-            $this->getLogger(__METHOD__)->error('payment Details',  $paymentDetails);
+            //$paymentDetails = $this->paymentHelper->getPaymentMethodByKey($paymentKey);
+            //$this->getLogger(__METHOD__)->error('payment Details',  $paymentDetails);
             $nnPaymentData['mop']            = $this->sessionStorage->getPlugin()->getValue('mop');
-           
+           $this->getLogger(__METHOD__)->error('MOP',  $this->sessionStorage->getPlugin()->getValue('mop'));
             $nnPaymentData['payment_method'] = (!empty($nnPaymentData['mop'])) ? strtolower($this->paymentHelper->getPaymentKeyByMop($nnPaymentData['mop'])) : $nnPaymentData['payment_key'];
            
             // if ($nnPaymentData['transaction']['payment_type'] == 'PAYPAL') {
