@@ -36,7 +36,7 @@
 
                 <div class="row" id="newCardDetails">
                     <div class="col-xs-12 col-sm-12 nnSavePayment">
-                        {% if oneClickShopping == 1 %}
+                        {% if oneClickShopping == 1 and customerNo is not empty %}
                             <input type="checkbox" name="nnSaveSepaPaymentData" id="nnSaveSepaPaymentData" class="form-check-input" checked>
                             <span class="saveCardText">{{trans("Novalnet::PaymentMethod.SaveAccountData")}}</span>
                         {% endif %}
