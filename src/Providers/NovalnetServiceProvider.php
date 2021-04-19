@@ -261,7 +261,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                         'paymentName'         => $paymentName,
                                         'ccFormDetails'       => !empty($ccFormDetails) ? $ccFormDetails : '',
                                         'ccCustomFields'       => !empty($ccCustomFields) ? $ccCustomFields : '',
-                                        'customerNo'           => $customerAccount->getAccountContactId();
+                                        'customerNo'           => $customerAccount->getAccountContactId(),
                                         'oneClickShopping'   => $oneClickShopping,
                                         'savedPaymentDetails' => $savedPaymentDetails,
                                         'removedSavedPaymentDetail' => $paymentHelper->getTranslatedText('removedSavedPaymentDetail'),
