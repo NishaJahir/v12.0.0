@@ -25,6 +25,7 @@ use Plenty\Modules\Basket\Events\BasketItem\AfterBasketItemAdd;
 use Plenty\Modules\Payment\Method\Contracts\PaymentMethodContainer;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Plenty\Modules\Account\Address\Contracts\AddressRepositoryContract;
+use Plenty\Modules\Frontend\Services\AccountService;
 use Plenty\Modules\Frontend\Session\Storage\Contracts\FrontendSessionStorageFactoryContract;
 use Plenty\Plugin\Log\Loggable;
 use Novalnet\Helper\PaymentHelper;
@@ -38,6 +39,7 @@ use Plenty\Modules\Plugin\DataBase\Contracts\DataBase;
 use Plenty\Modules\Plugin\DataBase\Contracts\Query;
 use Novalnet\Models\TransactionLog;
 use Plenty\Modules\Document\Models\Document;
+
 
 use Novalnet\Methods\NovalnetSepaPaymentMethod;
 use Novalnet\Methods\NovalnetCcPaymentMethod;
@@ -240,6 +242,8 @@ class NovalnetServiceProvider extends ServiceProvider
                                 $contentType = 'htmlContent';
                                 $billingAddressId = $basket->customerInvoiceAddressId;
                                 $billingAddress = $addressRepository->findAddressById($billingAddressId);
+                                $customerAccount = pluginApp(AccountService::class);
+                                
                                 $savedPaymentDetails = $dataBase->query(TransactionLog::class)->where('paymentName', '=', strtolower($paymentKey))->where('customerEmail', '=', $billingAddress->email)->where('saveOneTimeToken', '!=', "")->whereNull('maskingDetails', 'and', true)->orderBy('id','DESC')->limit(2)->get();
                                 $savedPaymentDetails = json_decode(json_encode($savedPaymentDetails), true);
                                 foreach($savedPaymentDetails as $key => $paymentDetail) {
@@ -257,6 +261,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                         'paymentName'         => $paymentName,
                                         'ccFormDetails'       => !empty($ccFormDetails) ? $ccFormDetails : '',
                                         'ccCustomFields'       => !empty($ccCustomFields) ? $ccCustomFields : '',
+                                        'customerNo'           => $customerAccount->getAccountContactId();
                                         'oneClickShopping'   => $oneClickShopping,
                                         'savedPaymentDetails' => $savedPaymentDetails,
                                         'removedSavedPaymentDetail' => $paymentHelper->getTranslatedText('removedSavedPaymentDetail'),
