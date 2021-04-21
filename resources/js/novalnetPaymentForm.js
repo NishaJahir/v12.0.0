@@ -28,14 +28,14 @@ $(document).ready( function () {
     $("input[name='savePaymentData']").on('click', function () {
         if($('input[name="savePaymentData"]').not(':checked'))
          {
-           ("#novalnetSavePaymentData").val('');
+           $("#novalnetSavePaymentData").val('');
            
          } else
          {
-           ("#novalnetSavePaymentData").val('1');
+           $("#novalnetSavePaymentData").val('1');
          }
     });
-    console.log('#novalnetSavePaymentData'.val());
+    console.log($('#novalnetSavePaymentData').val());
     
     if( $("input[name='nn_radio_option']").length > 0  ) { 
             var token = $("input[name='nn_radio_option']:first").val(); 
