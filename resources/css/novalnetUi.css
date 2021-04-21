@@ -87,10 +87,21 @@ width:100%;
   padding: revert !important; 
 }
 
-.row {
+.nn_row {
   padding-bottom: 2%;
 }
 
 .nnSavePayment {
   padding-bottom: 1.5%;
+  padding-left: 4%;
 }
+
+.nn_footer {
+ justify-content: center; 
+}
+
+.nn_payment {
+   color: #008ebd;
+   font-weight: 600;
+}
+justify-content: center;
