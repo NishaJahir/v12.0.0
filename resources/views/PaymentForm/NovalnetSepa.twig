@@ -77,11 +77,11 @@
 
     <div class="modal-footer nn_footer">
         <button type="submit" class="btn btn-primary" id="novalnetFormBtn" onclick="">
-            <i class="fa fa-check" aria-hidden="true"> </i>
+            <i class="fa fa-arrow-right" aria-hidden="true"> </i>
             {{ trans("Novalnet::PaymentMethod.submitButtonText") }}
         </button>
-	<button type="button" aria-label="Close" data-dismiss="modal" class="close" onClick="window.location.reload();">
-            <span aria-hidden="true">Cancel &times;</span>
+	<button type="button"  class="btn btn-danger" id="novalnetFormCancelBtn" onClick="window.location.reload();">
+            <i class="fa fa-window-close" aria-hidden="true"></i> Cancel
         </button> 
     </div>
 
