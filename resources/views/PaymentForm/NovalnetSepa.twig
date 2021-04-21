@@ -16,7 +16,7 @@
             <div class="col-xs-12 col-sm-12">
                 {% if savedPaymentDetails is not empty and oneClickShopping == 1 %}
                 {% for paymentDetail in savedPaymentDetails %}  
-                    <div class="row" id="remove_{{paymentDetail.saveOneTimeToken}}">
+                    <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
                         <div class="col-xs-12 col-sm-12">
                             <input type="radio" name="radioOption" id="maskingDetails">
                             <input type="hidden" name="novalnetsepaSelectedToken" value="{{paymentDetail.saveOneTimeToken}}">
