@@ -1,14 +1,13 @@
-<div class="modal-header">
-        <h4 class="modal-title nn_payment">{{paymentName}}</h4>
-</div>
-
 <link rel="stylesheet" href="{{plugin_path('Novalnet')}}/css/novalnetUi.css">
 <script type="text/javascript" src="https://cdn.novalnet.de/js/v2/NovalnetUtility.js"></script>
 <script src="{{ plugin_path('Novalnet') }}/js/novalnetPaymentForm.js"></script>
 
 <form method="post" id="novalnetSepaForm" name="novalnetSepaForm" action="{{nnPaymentProcessUrl}}">
     <input type="hidden" id="paymentKey" name="paymentKey" value="{{paymentMopKey}}" />
-    
+    <div class="modal-header">
+        <h4 class="modal-title nn_payment">{{paymentName}}</h4>
+   </div>
+   <div class="modal-body">
         <fieldset>      
                 <input type="hidden" name="removalProcessUrl" id="removalProcessUrl" value="{{savedPaymentDetailsRemovalUrl}}">
                 <input type="hidden" name="removedCardDetail" id="removedCardDetail" value="{{removedSavedPaymentDetail}}">
@@ -70,18 +69,18 @@
 						<input type="text" name="nn_guarantee_year" id="nn_guarantee_year" maxlength="4" placeholder="{{trans("Novalnet::PaymentMethod.year")}}" class="form-control" autocomplete="off">
 					</div>
 				</div> 
-                
+                 </div>
             </div>
         </fieldset>
     </div>
 
     <div class="modal-footer nn_footer">
-        <button type="submit" class="btn btn-primary" id="novalnetFormBtn" onclick="">
+        <button type="submit" class="btn btn-primary btn-medium" id="novalnetFormBtn" onclick="">
             <i class="fa fa-arrow-right" aria-hidden="true"> </i>
             {{ trans("Novalnet::PaymentMethod.submitButtonText") }}
         </button>
-	<button type="button"  class="btn btn-danger" id="novalnetFormCancelBtn" onClick="window.location.reload();">
-            <i class="fa fa-window-close" aria-hidden="true"></i> Cancel
+	<button type="button"  class="btn btn-danger btn-medium" id="novalnetFormCancelBtn" onClick="window.location.reload();">
+            <i class="fa fa-times" aria-hidden="true"></i> Cancel
         </button> 
     </div>
 
