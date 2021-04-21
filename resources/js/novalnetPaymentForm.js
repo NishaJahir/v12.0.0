@@ -33,7 +33,7 @@ $(document).ready( function () {
          {
            $("#novalnetSavePaymentData").val('');
          }
-    }).click();
+    });
     console.log($('#novalnetSavePaymentData').val());
     
     if( $("input[name='nn_radio_option']").length > 0  ) { 
