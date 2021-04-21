@@ -1,16 +1,14 @@
+<div class="modal-header">
+        <h4 class="modal-title nn_payment">{{paymentName}}</h4>
+</div>
+
 <link rel="stylesheet" href="{{plugin_path('Novalnet')}}/css/novalnetUi.css">
 <script type="text/javascript" src="https://cdn.novalnet.de/js/v2/NovalnetUtility.js"></script>
 <script src="{{ plugin_path('Novalnet') }}/js/novalnetPaymentForm.js"></script>
 
 <form method="post" id="novalnetSepaForm" name="novalnetSepaForm" action="{{nnPaymentProcessUrl}}">
     <input type="hidden" id="paymentKey" name="paymentKey" value="{{paymentMopKey}}" />
-
-    <div class="modal-header">
-        <h4 class="modal-title nn_payment">{{paymentName}}</h4>
-        
-    </div>
     
-    <div class="modal-body">
         <fieldset>      
                 <input type="hidden" name="removalProcessUrl" id="removalProcessUrl" value="{{savedPaymentDetailsRemovalUrl}}">
                 <input type="hidden" name="removedCardDetail" id="removedCardDetail" value="{{removedSavedPaymentDetail}}">
@@ -74,7 +72,6 @@
 				</div> 
                 
             </div>
-        </div>
         </fieldset>
     </div>
 
