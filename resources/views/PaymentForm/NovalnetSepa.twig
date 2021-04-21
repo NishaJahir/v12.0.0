@@ -17,7 +17,7 @@
                 <input type="hidden" name="removalProcessUrl" id="removalProcessUrl" value="{{savedPaymentDetailsRemovalUrl}}">
                 <input type="hidden" name="removedCardDetail" id="removedCardDetail" value="{{removedSavedPaymentDetail}}">
 
-        <div class="row">
+        <div class="row nn_row">
             <div class="col-xs-12 col-sm-12">
                 {% if savedPaymentDetails is not empty and oneClickShopping == 1 %}
                 {% for paymentDetail in savedPaymentDetails %}  
@@ -34,7 +34,7 @@
                  <input type="hidden" name="newForm" id="newForm">
                 {% endif %}
 
-                <div class="row" id="newCardDetails">
+                <div class="row nn_row" id="newCardDetails">
                     <div class="col-xs-12 col-sm-12 nnSavePayment">
                         {% if oneClickShopping == 1 and customerNo is not empty %}
                             <input type="checkbox" name="nnSaveSepaPaymentData" id="nnSaveSepaPaymentData" class="form-check-input" checked>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 
-                <div class="row">
+                <div class="row nn_row">
 					<div class="col-sm-12">
 						<b><label for="nn_birthday">{{trans("Novalnet::PaymentMethod.birthdateLabel")}}<span class="text-danger">*</span></label></b>
 					</div>
