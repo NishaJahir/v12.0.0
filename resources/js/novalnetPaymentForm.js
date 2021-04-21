@@ -35,7 +35,7 @@ $(document).ready( function () {
            ("#novalnetSavePaymentData").val('1');
          }
     });
-    console.log(("#novalnetSavePaymentData").val());
+    console.log('#novalnetSavePaymentData'.val());
     
     if( $("input[name='nn_radio_option']").length > 0  ) { 
             var token = $("input[name='nn_radio_option']:first").val(); 
