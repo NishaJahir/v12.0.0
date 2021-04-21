@@ -26,13 +26,12 @@ $(document).ready( function () {
     }
  
     $("input[name='savePaymentData']").on('click', function () {
-        if($('input[name="savePaymentData"]').not(':checked'))
-         {
-           $("#novalnetSavePaymentData").val('');
-           
-         } else
+        if($('input[name="savePaymentData"]').is(':checked'))
          {
            $("#novalnetSavePaymentData").val('1');
+         } else
+         {
+           $("#novalnetSavePaymentData").val('');
          }
     });
     console.log($('#novalnetSavePaymentData').val());
