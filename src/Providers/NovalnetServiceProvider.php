@@ -250,6 +250,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                     $savedPaymentDetails[$key]['iban'] = json_decode($paymentDetail['maskingDetails'])->iban;
                                     $savedPaymentDetails[$key]['decodedMaskingDetails'] = json_decode($paymentDetail['maskingDetails']);
                                 }
+                                $this->getLogger(__METHOD__)->error('saved details', $savedPaymentDetails);
                                 $contectTemplate = ((in_array($paymentKey, ['NOVALNET_SEPA', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_SEPA'])) ? 'Novalnet::PaymentForm.NovalnetSepa' : (($paymentKey == 'NOVALNET_CC') ? 'Novalnet::PaymentForm.NovalnetCc' : 'Novalnet::PaymentForm.NovalnetPaypal'));
                                 
                                 if(in_array($paymentKey, ['NOVALNET_CC', 'NOVALNET_SEPA', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_SEPA', 'NOVALNET_PAYPAL'])) {
