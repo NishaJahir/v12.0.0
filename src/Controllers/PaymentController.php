@@ -167,7 +167,7 @@ class PaymentController extends Controller
                 $responseData = $this->libCall->call('Novalnet::guzzle_client',
                 ['nn_access_key' => trim($this->config->get('Novalnet.novalnet_access_key')), 'nn_request' => $data, 'nn_request_process_url' => NovalnetConstants::TX_DETAILS_UPDATE_URL] 
             );
-                 
+                 $this->getLogger(__METHOD__)->error('Transaction update call response redirect', $responseData);
                 //$responseData = $this->paymentHelper->executeCurl(json_encode($data), NovalnetConstants::TX_DETAILS_UPDATE_URL);
                 return $responseData;
             }
