@@ -231,7 +231,7 @@ class NovalnetServiceProvider extends ServiceProvider
                         $paymentName = ($name ? $name : $paymentHelper->getTranslatedText(strtolower($paymentKey)));
                         $basket = $basketRepository->load();
                         $oneClickShopping = (int) trim($config->get('Novalnet.' . strtolower($paymentKey) . '_shopping_type') == true);
-                        $this->getLogger(__METHOD__)->error('one click shop', $config->get('Novalnet.' . strtolower($paymentKey) . '_shopping_type');
+                        $this->getLogger(__METHOD__)->error('one click shop', $config->get('Novalnet.' . strtolower($paymentKey) . '_shopping_type'));
                         // Get the payment request data
                         $paymentRequestParameters = $paymentService->getPaymentRequestParameters($basket, $paymentKey);
                         if (empty($paymentRequestParameters['data']['customer']['first_name']) && empty($paymentRequestParameters['data']['customer']['last_name'])) {
