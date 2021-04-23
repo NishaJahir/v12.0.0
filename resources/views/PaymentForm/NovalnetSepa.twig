@@ -10,7 +10,7 @@
    <div class="modal-body">
         <fieldset>      
                 <input type="hidden" name="removalProcessUrl" id="removalProcessUrl" value="{{savedPaymentDetailsRemovalUrl}}">
-                <input type="hidden" name="removedCardDetail" id="removedCardDetail" value="{{removedSavedPaymentDetail}}">
+                <input type="hidden" name="removedCardDetail" id="removedCardDetail" value="{{trans("Novalnet::PaymentMethod.removedSavedPaymentDetail")}}">
 
         <div class="row nn_row">
             <div class="col-xs-12 col-sm-12">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 {% endfor %}
-		<div class="enteringNewDetails">
+		<div class="newPaymentDetailToggle">
 			 <input type="radio" name="radioOption" id="toggleForm"><strong>  {{trans("Novalnet::PaymentMethod.addNewAccountDetails")}}</strong><br><br>
 			 <input type="hidden" name="newForm" id="newForm">
 		</div>
