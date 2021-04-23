@@ -19,10 +19,10 @@
 		<input type="hidden" name="index" id="index" value="{{loop.index}}">
                     <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
                         <div class="col-xs-12 col-sm-12">
-                            <input type="radio" class="nnSavedPaymentDetailToken" name="radioOption" id="nnSavedDetail{{loop.index}}">
+                            <input type="radio" class="nnSavedPaymentDetailToken" name="radioOption" id="nnPaymentDetailSaved{{loop.index}}">
                             <input type="hidden" name="novalnetsepaSelectedToken" value="{{paymentDetail.saveOneTimeToken}}">
                             <span>{{trans("Novalnet::PaymentMethod.sepaIbanLabel")}} {{paymentDetail.iban}}</span>
-                            <button type="button" class="btn btn-danger btnDelete"  onclick="removePaymentDetails('{{paymentDetail.saveOneTimeToken}}')" value="{{paymentDetail.saveOneTimeToken}}"><span class="fa fa-trash-o"></span></button>
+                            <button type="button" class="btn btn-danger btnDelete"  data-saved-radio-id="nnPaymentDetailSaved{{loop.index}}" onclick="removePaymentDetails('{{paymentDetail.saveOneTimeToken}}')" value="{{paymentDetail.saveOneTimeToken}}"><span class="fa fa-trash-o"></span></button>
                         </div>
                     </div>
                 {% endfor %}
