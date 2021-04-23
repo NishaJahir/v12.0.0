@@ -19,15 +19,17 @@
 		<input type="hidden" name="index" id="index" value="{{loop.index}}">
                     <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
                         <div class="col-xs-12 col-sm-12">
-                            <input type="radio" name="radioOption" id="maskingDetails">
+                            <input type="radio" class="nnSavedPaymentDetailToken" name="radioOption" id="nnSavedDetail{{loop.index}}">
                             <input type="hidden" name="novalnetsepaSelectedToken" value="{{paymentDetail.saveOneTimeToken}}">
                             <span>{{trans("Novalnet::PaymentMethod.sepaIbanLabel")}} {{paymentDetail.iban}}</span>
                             <button type="button" class="btn btn-danger btnDelete"  onclick="removePaymentDetails('{{paymentDetail.saveOneTimeToken}}')" value="{{paymentDetail.saveOneTimeToken}}"><span class="fa fa-trash-o"></span></button>
                         </div>
                     </div>
                 {% endfor %}
-                 <input type="radio" name="radioOption" id="toggleForm"><strong>  {{trans("Novalnet::PaymentMethod.addNewAccountDetails")}}</strong><br><br>
-                 <input type="hidden" name="newForm" id="newForm">
+		<div class="enteringNewDetails">
+			 <input type="radio" name="radioOption" id="toggleForm"><strong>  {{trans("Novalnet::PaymentMethod.addNewAccountDetails")}}</strong><br><br>
+			 <input type="hidden" name="newForm" id="newForm">
+		</div>
                 {% endif %}
 
                 <div class="row nn_row" id="newCardDetails">
