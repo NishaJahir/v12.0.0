@@ -25,7 +25,7 @@ $(document).ready( function () {
         $("#newCardDetails").hide();
     }
  
-    $("input[name='savePaymentData']").on('click', function () {
+    $("input[name='savePaymentData']").on('change', function () {
         if($("input[name='savePaymentData']").is(':checked'))
          {
            $("#novalnetSavePaymentData").val('1');
@@ -35,7 +35,7 @@ $(document).ready( function () {
            $("#novalnetSavePaymentData").val('');
            console.log($('#novalnetSavePaymentData').val());
          }
-    });
+    }).change();
     
     
     if( $("input[name='nn_radio_option']").length > 0  ) { 
