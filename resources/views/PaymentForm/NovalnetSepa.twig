@@ -14,7 +14,7 @@
 
         <div class="row nn_row">
             <div class="col-xs-12 col-sm-12">
-                {% if savedPaymentDetails is not empty and oneClickShopping == true %}
+                {% if (savedPaymentDetails is not empty) and (oneClickShopping == true) %}
                 {% for paymentDetail in savedPaymentDetails %}  
 		<input type="hidden" name="index" id="index" value="{{loop.index}}">
                     <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
@@ -34,7 +34,7 @@
 
                 <div class="row nn_row" id="newCardDetails">
                     <div class="col-xs-12 col-sm-12 nnSavePayment">
-                        {% if oneClickShopping == true and customerNo is not empty %}
+                        {% if (oneClickShopping == true) and (customerNo is not empty) %}
                             <input type="checkbox" name="savePaymentData" id="savePaymentData" class="form-check-input" checked>
 			    <input type="hidden" name="novalnetSavePaymentData" id="novalnetSavePaymentData">
                             <span class="saveCardText">{{trans("Novalnet::PaymentMethod.SaveAccountData")}}</span>
