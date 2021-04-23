@@ -88,7 +88,7 @@ class TransactionService
             $orderDetail->saveOneTimeToken = "";
             $orderDetail->maskingDetails = null;
             $database->save($orderDetail);
-		 $updatedView = $database->query(TransactionLog::class)->where($key, '=', $requestData['token'])->get();
+		 $updatedView = $database->query(TransactionLog::class)->where('orderNo', '=', $orderDetail->orderNo)->get();
 		$this->getLogger(__METHOD__)->error('After removed the data', $updatedView);
         } catch (\Exception $e) {
             $this->getLogger(__METHOD__)->error('Removal of payment token failed!.', $e);
