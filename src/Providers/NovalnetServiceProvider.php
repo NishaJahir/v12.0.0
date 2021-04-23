@@ -231,7 +231,7 @@ class NovalnetServiceProvider extends ServiceProvider
                         $paymentName = ($name ? $name : $paymentHelper->getTranslatedText(strtolower($paymentKey)));
                         $basket = $basketRepository->load();
                         $oneClickShopping = (int) trim($config->get('Novalnet.' . strtolower($paymentKey) . '_shopping_type') == true);
-                        $this->getLogger(__METHOD__)->error('one click shop', $oneClickShopping);
+                        
                         // Get the payment request data
                         $paymentRequestParameters = $paymentService->getPaymentRequestParameters($basket, $paymentKey);
                         if (empty($paymentRequestParameters['data']['customer']['first_name']) && empty($paymentRequestParameters['data']['customer']['last_name'])) {
@@ -251,7 +251,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                     $savedPaymentDetails[$key]['decodedMaskingDetails'] = json_decode($paymentDetail['maskingDetails']);
                                 }
                                 $contectTemplate = ((in_array($paymentKey, ['NOVALNET_SEPA', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_SEPA'])) ? 'Novalnet::PaymentForm.NovalnetSepa' : (($paymentKey == 'NOVALNET_CC') ? 'Novalnet::PaymentForm.NovalnetCc' : 'Novalnet::PaymentForm.NovalnetPaypal'));
-                                $this->getLogger(__METHOD__)->error('content template', $contectTemplate);
+                                
                                 if(in_array($paymentKey, ['NOVALNET_CC', 'NOVALNET_SEPA', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_SEPA', 'NOVALNET_PAYPAL'])) {
                                     $ccFormDetails = $paymentService->getCcFormData($basket, $paymentKey);
                                     $ccCustomFields = $paymentService->getCcFormFields();
@@ -268,8 +268,6 @@ class NovalnetServiceProvider extends ServiceProvider
                                         'savedPaymentDetailsRemovalUrl' => $paymentService->getSavedTokenRemovalUrl(),
                                     ]);
                                 } elseif (in_array($paymentKey, ['NOVALNET_INSTALMENT_INVOICE'])) {
-                                    $response =  $paymentService->checkPaymentDisplayConditions($basket, strtolower($paymentKey));
-                                $this->getLogger(__METHOD__)->error('final check', $response);
                                     $content = $twig->render('Novalnet::PaymentForm.NovalnetAdditionalPaymentForm', [
                                     'nnPaymentProcessUrl' => $paymentService->getProcessPaymentUrl(),
                                     'paymentMopKey'       =>  $paymentKey,
@@ -296,7 +294,7 @@ class NovalnetServiceProvider extends ServiceProvider
             {
                 if($paymentHelper->getPaymentKeyByMop($event->getMop())) {
                     $sessionStorage->getPlugin()->setValue('nnOrderNo',$event->getOrderId());
-                    $sessionStorage->getPlugin()->setValue('mop',$event->getMop());
+                    //$sessionStorage->getPlugin()->setValue('mop',$event->getMop());
                     $paymentKey = $paymentHelper->getPaymentKeyByMop($event->getMop());
                     $sessionStorage->getPlugin()->setValue('paymentKey',$paymentKey);
                     $paymentService->performServerCall();
