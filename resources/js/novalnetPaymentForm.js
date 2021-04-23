@@ -37,7 +37,6 @@ $(document).ready( function () {
          }
     }).change();
     
-    
     if( $("input[name='nn_radio_option']").length > 0  ) { 
             var token = $("input[name='nn_radio_option']:first").val(); 
             if(token){
@@ -225,7 +224,10 @@ function savedPaymentRequestHandler(removeSavedPaymentParams) {
                 success  : function (result) {
                     $('#remove_'+removeSavedPaymentParams['token']).remove();
                     alert($('#removeCardDetail').val());
-               
+                    if ($(".nnSavedPaymentDetailToken").length == 0 ) {
+                       $("#newCardDetails").show();
+                       $(".newPaymentDetailToggle").hide();
+                    }
                 }
             }
         );
