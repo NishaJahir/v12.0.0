@@ -672,8 +672,7 @@ class PaymentService
                  
                 $this->validatePaymentResponse($paymentKey);
             }
-            
-           $this->getLogger(__METHOD__)->error('Payment Response', $response);
+
         } catch (\Exception $e) {
                 $this->getLogger(__METHOD__)->error('Novalnet::performServerCall', $e);
         }
@@ -854,7 +853,7 @@ class PaymentService
                     }
                 }
             }
-            $this->getLogger(__METHOD__)->error( 'getTransactionCommentVal' ,$transactionDetails);
+         
             return ['bankDetails' => $bankDetails, 'transactionDetails' => $transactionDetails];
         }  
         return '';       
