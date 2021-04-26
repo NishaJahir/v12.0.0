@@ -280,7 +280,7 @@ class PaymentService
                     }
                 }
              } else {
-                $minimumAmount = (!empty($minimumAmount) && $minimumAmount >= 999)) ? $minimumAmount : 999;
+                $minimumAmount = (!empty($minimumAmount) && $minimumAmount >= 999) ? $minimumAmount : 999;
                 $amount        = (sprintf('%0.2f', $basket->basketAmount) * 100);
                 $instalementCyclesCheck = true;
              }
