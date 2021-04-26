@@ -354,6 +354,8 @@ class PaymentService
         if($paymentActive) {
             $guaranteeCondnMet = $this->checkPaymentDisplayConditions($basket, $paymentKey);
             $forceGuarantee = $this->config->get('Novalnet.'.$paymentKey.'_force_active');
+            $this->getLogger(__METHOD__)->error('display guaranteed', $guaranteeCondnMet);
+        $this->getLogger(__METHOD__)->error('Force', $forceGuarantee);
             if($guaranteeCondnMet == true) {
                 return 'guarantee';
             } elseif(!empty($forceGuarantee) && $guaranteeCondnMet == false) {
@@ -362,8 +364,7 @@ class PaymentService
                 return 'error';
             }
         }
-        $this->getLogger(__METHOD__)->error('display guaranteed', $guaranteeCondnMet);
-        $this->getLogger(__METHOD__)->error('Force', $forceGuarantee);
+        
         return 'normal';
     }
     
