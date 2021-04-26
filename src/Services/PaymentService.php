@@ -357,7 +357,7 @@ class PaymentService
         
         if($paymentActive) {
             $guaranteeCondnMet = $this->checkPaymentDisplayConditions($basket, $paymentKey);
-            $forceGuarantee = $this->config->get('Novalnet.'.$paymentKey.'_force_active');
+            $forceGuarantee = trim($this->config->get('Novalnet.'.$paymentKey.'_force_active'));
             $this->getLogger(__METHOD__)->error('condn', $guaranteeCondnMet);
             $this->getLogger(__METHOD__)->error('force guarantee', $forceGuarantee);
             if(!empty($guaranteeCondnMet)) {
