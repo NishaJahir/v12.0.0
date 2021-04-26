@@ -81,7 +81,7 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodBaseService
            $paymentType = $this->paymentService->checkGuaranteePaymentDisplayStatus($this->basket, 'novalnet_invoice');
             $displayPayment = ($paymentType == 'normal') ? true : false;
             $this->getLogger(__METHOD__)->error('display normal invoice', $displayPayment );
-        return (bool)($this->paymentService->isPaymentActive($this->basket, 'novalnet_invoice'));
+        return (bool)($this->paymentService->isPaymentActive($this->basket, 'novalnet_invoice') && $displayPayment);
        }
         return false;
     }
