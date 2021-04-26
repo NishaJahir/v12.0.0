@@ -22,13 +22,14 @@ use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
 use Plenty\Modules\Basket\Models\Basket;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
-
+use Plenty\Plugin\Log\Loggable;
 /**
  * Class NovalnetInvoice
  * @package Novalnet\Methods
  */
 class NovalnetInvoicePaymentMethod extends PaymentMethodBaseService
 {
+     use Loggable;
     /**
      * @var ConfigRepository
      */
@@ -77,6 +78,9 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodBaseService
     public function isActive():bool
     {
        if ($this->config->get('Novalnet.novalnet_invoice_payment_active') == 'true') {
+           $paymentType = $this->paymentService->checkGuaranteePaymentDisplayStatus($this->basket, 'novalnet_invoice');
+            $displayPayment = ($paymentType == 'normal') ? true : false;
+            $this->getLogger(__METHOD__)->error('display normal invoice', $displayPayment );
         return (bool)($this->paymentService->isPaymentActive($this->basket, 'novalnet_invoice'));
        }
         return false;
