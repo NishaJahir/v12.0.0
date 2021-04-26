@@ -11,10 +11,11 @@
         <fieldset>      
                 <input type="hidden" name="removalProcessUrl" id="removalProcessUrl" value="{{savedPaymentDetailsRemovalUrl}}">
                 <input type="hidden" name="removedCardDetail" id="removedCardDetail" value="{{trans("Novalnet::PaymentMethod.removedSavedPaymentDetail")}}">
-
+		<input type="hidden" name="oneclick" id="oneclick" value="{{oneClickShopping}}">
+		<input type="hidden" name="customerno" id="customerno" value="{{customerNo}}">
         <div class="row nn_row">
             <div class="col-xs-12 col-sm-12">
-                {% if (savedPaymentDetails is not empty) and (oneClickShopping is not empty) %}
+                {% if savedPaymentDetails is not empty and oneClickShopping == 'true' and customerNo is not empty %}
                 {% for paymentDetail in savedPaymentDetails %}  
 		<input type="hidden" name="index" id="index" value="{{loop.index}}">
                     <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
@@ -34,7 +35,7 @@
 
                 <div class="row nn_row" id="newCardDetails">
                     <div class="col-xs-12 col-sm-12 nnSavePayment">
-                        {% if (oneClickShopping is not empty) and (customerNo is not empty) %}
+                        {% if oneClickShopping == 'true' and customerNo is not empty %}
                             <input type="checkbox" name="savePaymentData" id="savePaymentData" class="form-check-input" checked>
 			    <input type="hidden" name="novalnetSavePaymentData" id="novalnetSavePaymentData">
                             <span class="saveCardText">{{trans("Novalnet::PaymentMethod.SaveAccountData")}}</span>
