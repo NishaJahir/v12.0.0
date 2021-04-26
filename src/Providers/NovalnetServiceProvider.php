@@ -243,7 +243,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                 $billingAddressId = $basket->customerInvoiceAddressId;
                                 $billingAddress = $addressRepository->findAddressById($billingAddressId);
                                 $customerAccount = pluginApp(AccountService::class);
-                               
+                               $this->getLogger(__METHOD__)->error('customer account id',  $customerAccount->getAccountContactId());
                                 $savedPaymentDetails = $dataBase->query(TransactionLog::class)->where('paymentName', '=', strtolower($paymentKey))->where('customerEmail', '=', $billingAddress->email)->where('saveOneTimeToken', '!=', "")->whereNull('maskingDetails', 'and', true)->orderBy('id','DESC')->limit(2)->get();
                                 $savedPaymentDetails = json_decode(json_encode($savedPaymentDetails), true);
                                 foreach($savedPaymentDetails as $key => $paymentDetail) {
