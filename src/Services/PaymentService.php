@@ -353,22 +353,24 @@ class PaymentService
     public function checkGuaranteePaymentDisplayStatus(Basket $basket, $paymentKey)
     {
         
-        $paymentActive = $this->config->get('Novalnet.'.$paymentKey.'_payment_active');
+        $paymentActive = $this->config->get('Novalnet.' .$paymentKey. '_payment_active');
         
         if($paymentActive) {
             $guaranteeCondnMet = $this->checkPaymentDisplayConditions($basket, $paymentKey);
-            $forceGuarantee = trim($this->config->get('Novalnet.'.$paymentKey.'_force_active'));
+            $forceGuarantee = trim($this->config->get('Novalnet.' .$paymentKey. '_force_active'));
             $this->getLogger(__METHOD__)->error('condn', $guaranteeCondnMet);
-            $this->getLogger(__METHOD__)->error('force guarantee', $forceGuarantee);
+            
             if(!empty($guaranteeCondnMet)) {
                 return 'guarantee';
             } elseif($forceGuarantee == true && empty($guaranteeCondnMet)) {
+                $this->getLogger(__METHOD__)->error('forceeeeeeee', $forceGuarantee);
                 return 'normal';
             } elseif($forceGuarantee == false && empty($guaranteeCondnMet)) {
+                $this->getLogger(__METHOD__)->error('forceeeeeeee', $forceGuarantee);
                 return 'error';
             }
         }
-        
+         $this->getLogger(__METHOD__)->error('below', $forceGuarantee);
         return 'normal';
     }
     
