@@ -362,9 +362,9 @@ class PaymentService
             $this->getLogger(__METHOD__)->error('force guarantee', $forceGuarantee);
             if(!empty($guaranteeCondnMet)) {
                 return 'guarantee';
-            } elseif(!empty($forceGuarantee) && empty($guaranteeCondnMet)) {
+            } elseif($forceGuarantee == true && empty($guaranteeCondnMet)) {
                 return 'normal';
-            } elseif(empty($forceGuarantee) && empty($guaranteeCondnMet)) {
+            } elseif($forceGuarantee == false && empty($guaranteeCondnMet)) {
                 return 'error';
             }
         }
