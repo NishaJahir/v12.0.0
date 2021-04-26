@@ -230,8 +230,8 @@ class NovalnetServiceProvider extends ServiceProvider
                         $name = trim($config->get('Novalnet.' . strtolower($paymentKey) . '_payment_name'));
                         $paymentName = ($name ? $name : $paymentHelper->getTranslatedText(strtolower($paymentKey)));
                         $basket = $basketRepository->load();
-                        $oneClickShopping = (int) trim($config->get('Novalnet.' . strtolower($paymentKey) . '_shopping_type') == true);
-                        $this->getLogger(__METHOD__)->error('one click shop', $config->get('Novalnet.' . strtolower($paymentKey) . '_shopping_type'));
+                        $oneClickShopping = (int) trim($config->get('Novalnet.' . strtolower($paymentKey) . '_shopping_type') == 'true');
+                        $this->getLogger(__METHOD__)->error('one click shoppppppppp', $oneClickShopping);
                         // Get the payment request data
                         $paymentRequestParameters = $paymentService->getPaymentRequestParameters($basket, $paymentKey);
                         if (empty($paymentRequestParameters['data']['customer']['first_name']) && empty($paymentRequestParameters['data']['customer']['last_name'])) {
@@ -243,7 +243,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                 $billingAddressId = $basket->customerInvoiceAddressId;
                                 $billingAddress = $addressRepository->findAddressById($billingAddressId);
                                 $customerAccount = pluginApp(AccountService::class);
-                                $this->getLogger(__METHOD__)->error('customer No', $customerAccount->getAccountContactId() );
+                               
                                 $savedPaymentDetails = $dataBase->query(TransactionLog::class)->where('paymentName', '=', strtolower($paymentKey))->where('customerEmail', '=', $billingAddress->email)->where('saveOneTimeToken', '!=', "")->whereNull('maskingDetails', 'and', true)->orderBy('id','DESC')->limit(2)->get();
                                 $savedPaymentDetails = json_decode(json_encode($savedPaymentDetails), true);
                                 foreach($savedPaymentDetails as $key => $paymentDetail) {
