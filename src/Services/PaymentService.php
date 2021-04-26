@@ -258,6 +258,9 @@ class PaymentService
     */
     public function checkPaymentDisplayConditions(Basket $basket, $paymentKey) 
     {
+        $this->getLogger(__METHOD__)->error('basket', $basket);
+        $this->getLogger(__METHOD__)->error('payment key', $paymentKey);
+        
         try {
             if (! is_null($basket) && $basket instanceof Basket && !empty($basket->customerInvoiceAddressId)) {
             $paymentActive = $this->config->get('Novalnet.'.$paymentKey.'_payment_active');
