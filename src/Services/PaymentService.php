@@ -333,7 +333,7 @@ class PaymentService
         ];
         if(in_array($countryCode, ['DE', 'AT', 'CH'])) {
             $countryValidation = true;
-        } elseif($allowB2B == true && in_array($countryCode, $europeanUnionCountryCodes)) {
+        } elseif($allowB2B == 'true' && in_array($countryCode, $europeanUnionCountryCodes)) {
             $countryValidation = true;
         } else {
             $countryValidation = false;
