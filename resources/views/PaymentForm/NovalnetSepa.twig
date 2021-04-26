@@ -54,6 +54,7 @@
                     </div>
                 </div>
                 
+		{% if guaranteePayment == 'guarantee' %}
                 <div class="row nn_row">
 					<div class="col-sm-12">
 						<b><label for="nn_birthday">{{trans("Novalnet::PaymentMethod.birthdateLabel")}}<span class="text-danger">*</span></label></b>
@@ -73,6 +74,7 @@
 						<input type="text" name="nn_guarantee_year" id="nn_guarantee_year" maxlength="4" placeholder="{{trans("Novalnet::PaymentMethod.year")}}" class="form-control" autocomplete="off">
 					</div>
 				</div> 
+	        {% endif %}
                  </div>
             </div>
         </fieldset>
