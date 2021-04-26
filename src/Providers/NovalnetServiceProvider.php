@@ -260,7 +260,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                         'nnPaymentProcessUrl' => $paymentService->getProcessPaymentUrl(),
                                         'paymentMopKey'       =>  $paymentKey,
                                         'paymentName'         => $paymentName,
-                                        'guaranteePayment'    => $paymentService->checkGuaranteePaymentDisplayStatus($basket, strtolower($paymentKey));
+                                        'guaranteePayment'    => $paymentService->checkGuaranteePaymentDisplayStatus($basket, strtolower($paymentKey)),
                                         'ccFormDetails'       => !empty($ccFormDetails) ? $ccFormDetails : '',
                                         'ccCustomFields'       => !empty($ccCustomFields) ? $ccCustomFields : '',
                                         'customerNo'           => $customerAccount->getAccountContactId(),
