@@ -258,8 +258,7 @@ class PaymentService
     */
     public function checkPaymentDisplayConditions(Basket $basket, $paymentKey) 
     {
-        $this->getLogger(__METHOD__)->error('basket', $basket);
-        $this->getLogger(__METHOD__)->error('payment key', $paymentKey);
+       
         
         try {
             if (! is_null($basket) && $basket instanceof Basket && !empty($basket->customerInvoiceAddressId)) {
@@ -297,6 +296,13 @@ class PaymentService
                 // Get country validation value
                 $billingShippingDetails = $this->getBillingShippingDetails($billingAddress, $shippingAddress);
                 $countryValidation = $this->europeanUnionCountryValidation($paymentKey, $billingShippingDetails['billing']['country_code']);
+                 $this->getLogger(__METHOD__)->error('amount', $amount);
+        $this->getLogger(__METHOD__)->error('min amount', $minimumAmount);
+                $this->getLogger(__METHOD__)->error('inst', $instalementCyclesCheck);
+                $this->getLogger(__METHOD__)->error('country', $countryValidation);
+                $this->getLogger(__METHOD__)->error('currency', $basket->currency);
+                $this->getLogger(__METHOD__)->error('bill ship', $billingShippingDetails);
+               
                 // Check the payment condition
                 if((((int) $amount >= (int) $minimumAmount && $instalementCyclesCheck && $countryValidation && $basket->currency == 'EUR' && ($billingShippingDetails['billing'] === $billingShippingDetails['shipping']) )
                 )) {
