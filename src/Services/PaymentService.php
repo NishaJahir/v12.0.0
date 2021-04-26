@@ -362,6 +362,8 @@ class PaymentService
                 return 'error';
             }
         }
+        $this->getLogger(__METHOD__)->error('display guaranteed', $guaranteeCondnMet);
+        $this->getLogger(__METHOD__)->error('Force', $forceGuarantee);
         return 'normal';
     }
     
