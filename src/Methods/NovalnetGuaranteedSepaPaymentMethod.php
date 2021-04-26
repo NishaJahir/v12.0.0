@@ -22,13 +22,14 @@ use Novalnet\Helper\PaymentHelper;
 use Novalnet\Services\PaymentService;
 use Plenty\Modules\Basket\Models\Basket;
 use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
-
+use Plenty\Plugin\Log\Loggable;
 /**
  * Class NovalnetGuaranteedSepaPaymentMethod
  * @package Novalnet\Methods
  */
 class NovalnetGuaranteedSepaPaymentMethod extends PaymentMethodBaseService
 {
+    use Loggable;
     /**
      * @var ConfigRepository
      */
@@ -77,6 +78,9 @@ class NovalnetGuaranteedSepaPaymentMethod extends PaymentMethodBaseService
     public function isActive():bool
     {
        if ($this->config->get('Novalnet.novalnet_guaranteed_sepa_payment_active') == 'true') {
+        $paymentType = $this->paymentService->checkGuaranteePaymentDisplayStatus($this->basket, 'novalnet_guaranteed_sepa');
+            $displayPayment = ($paymentType == 'guarantee') ? true : false;
+            $this->getLogger(__METHOD__)->error('display gua sepa', $displayPayment );
         return (bool)($this->paymentService->isPaymentActive($this->basket, 'novalnet_guaranteed_sepa'));
        }
         return false;
