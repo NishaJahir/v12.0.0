@@ -262,8 +262,10 @@ class PaymentService
             if (! is_null($basket) && $basket instanceof Basket && !empty($basket->customerInvoiceAddressId)) {
             $paymentActive = $this->config->get('Novalnet.'.$paymentKey.'_payment_active');
             if ($paymentActive == 'true') {
-                // Minimum amount validation
-                $minimumAmount = trim($this->config->get('Novalnet.'.$paymentKey. '_min_amount'));
+            // Minimum amount validation
+            $minimumAmount = trim($this->config->get('Novalnet.'.$paymentKey. '_min_amount'));
+
+            if(in_array($paymentKey, array('novalnet_instalment_invoice', 'novalnet_instalment_sepa'))) {
                 $minimumAmount = ((preg_match('/^[0-9]*$/', $minimumAmount) && $minimumAmount >= '1998')  ? $minimumAmount : '1998');
                 $amount        = (sprintf('%0.2f', $basket->basketAmount) * 100);
                 // Check instalment cycles
@@ -277,6 +279,11 @@ class PaymentService
                         }
                     }
                 }
+             } else {
+                $minimumAmount = (!empty($minimumAmount) && $minimumAmount >= 999)) ? $minimumAmount : 999;
+                $amount        = (sprintf('%0.2f', $basket->basketAmount) * 100);
+                $instalementCyclesCheck = true;
+             }
                 // Address validation
                 $billingAddressId = $basket->customerInvoiceAddressId;
                 $billingAddress = $this->addressRepository->findAddressById($billingAddressId);
@@ -328,6 +335,34 @@ class PaymentService
             $countryValidation = false;
         }
         return $countryValidation;
+    }
+    
+    
+    /**
+    * Check guarantee payment conditions
+    *
+    * @param string $paymentName
+    * @param oject $billingAddress
+    * @param object $shippingAddress
+    * @return bool
+    */
+    public function checkGuaranteePaymentDisplayStatus(Basket $basket, $paymentKey)
+    {
+        
+        $paymentActive = $this->config->get('Novalnet.'.$paymentKey.'_payment_active');
+        
+        if($paymentActive) {
+            $guaranteeCondnMet = $this->checkPaymentDisplayConditions($basket, $paymentName);
+            $forceGuarantee = $this->config->get('Novalnet.'.$paymentKey.'_force_active');
+            if($guaranteeCondnMet == true) {
+                return 'guarantee';
+            } elseif(!empty($forceGuarantee) && $guaranteeCondnMet == false) {
+                return 'normal';
+            } elseif(empty($forceGuarantee) && $guaranteeCondnMet == false) {
+                return 'error';
+            }
+        }
+        return 'normal';
     }
     
     /**
