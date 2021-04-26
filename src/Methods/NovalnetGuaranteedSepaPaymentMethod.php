@@ -81,7 +81,7 @@ class NovalnetGuaranteedSepaPaymentMethod extends PaymentMethodBaseService
         $paymentType = $this->paymentService->checkGuaranteePaymentDisplayStatus($this->basket, 'novalnet_guaranteed_sepa');
             $displayPayment = ($paymentType == 'guarantee') ? true : false;
             $this->getLogger(__METHOD__)->error('display gua sepa', $displayPayment );
-        return (bool)($this->paymentService->isPaymentActive($this->basket, 'novalnet_guaranteed_sepa'));
+        return (bool)($this->paymentService->isPaymentActive($this->basket, 'novalnet_guaranteed_sepa') && $displayPayment);
        }
         return false;
     }
