@@ -352,7 +352,7 @@ class PaymentService
         $paymentActive = $this->config->get('Novalnet.'.$paymentKey.'_payment_active');
         
         if($paymentActive) {
-            $guaranteeCondnMet = $this->checkPaymentDisplayConditions($basket, $paymentName);
+            $guaranteeCondnMet = $this->checkPaymentDisplayConditions($basket, $paymentKey);
             $forceGuarantee = $this->config->get('Novalnet.'.$paymentKey.'_force_active');
             if($guaranteeCondnMet == true) {
                 return 'guarantee';
