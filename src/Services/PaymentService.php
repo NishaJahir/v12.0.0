@@ -296,12 +296,7 @@ class PaymentService
                 // Get country validation value
                 $billingShippingDetails = $this->getBillingShippingDetails($billingAddress, $shippingAddress);
                 $countryValidation = $this->europeanUnionCountryValidation($paymentKey, $billingShippingDetails['billing']['country_code']);
-                 $this->getLogger(__METHOD__)->error('amount', $amount);
-        $this->getLogger(__METHOD__)->error('min amount', $minimumAmount);
-                $this->getLogger(__METHOD__)->error('inst', $instalementCyclesCheck);
-                $this->getLogger(__METHOD__)->error('country', $countryValidation);
-                $this->getLogger(__METHOD__)->error('currency', $basket->currency);
-                $this->getLogger(__METHOD__)->error('bill ship', $billingShippingDetails);
+                
                
                 // Check the payment condition
                 if((((int) $amount >= (int) $minimumAmount && $instalementCyclesCheck && $countryValidation && $basket->currency == 'EUR' && ($billingShippingDetails['billing'] === $billingShippingDetails['shipping']) )
@@ -363,8 +358,7 @@ class PaymentService
         if($paymentActive) {
             $guaranteeCondnMet = $this->checkPaymentDisplayConditions($basket, $paymentKey);
             $forceGuarantee = $this->config->get('Novalnet.'.$paymentKey.'_force_active');
-            $this->getLogger(__METHOD__)->error('display guaranteed', $guaranteeCondnMet);
-        $this->getLogger(__METHOD__)->error('Force', $forceGuarantee);
+            
             if(!empty($guaranteeCondnMet)) {
                 return 'guarantee';
             } elseif(!empty($forceGuarantee) && empty($guaranteeCondnMet)) {
