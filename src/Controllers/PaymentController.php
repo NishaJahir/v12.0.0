@@ -197,7 +197,7 @@ class PaymentController extends Controller
         // Send Instalment info to NN server
         if (in_array($requestData['paymentKey'], ['NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA'])) {
             $paymentRequestParameters['instalment']['interval'] = '1m';
-            $paymentRequestParameters['instalment']['cycles'] = $sessionVal['nn_instalment_cycle'];
+            $paymentRequestParameters['instalment']['cycles'] = $requestData['nnInstalmentCycle'];
         }
         // Send Spefic payments required paramters to NN server
         if (!empty($requestData[$paymentKey[0].$paymentKey[1].'SelectedToken']) && empty($requestData['newForm'])) {
