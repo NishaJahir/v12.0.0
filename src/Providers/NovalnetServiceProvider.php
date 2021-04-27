@@ -252,7 +252,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                 }
                                 $this->getLogger(__METHOD__)->error('saved details', $savedPaymentDetails);
                                 $contectTemplate = ((in_array($paymentKey, ['NOVALNET_SEPA', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_SEPA'])) ? 'Novalnet::PaymentForm.NovalnetSepa' : (($paymentKey == 'NOVALNET_CC') ? 'Novalnet::PaymentForm.NovalnetCc' : 'Novalnet::PaymentForm.NovalnetPaypal'));
-                                
+                                $showBirthday = (empty($billingAddress->companyName) && ($paymentService->checkGuaranteePaymentDisplayStatus($basket, strtolower($paymentKey)) == 'guarantee' || $paymentKey == 'NOVALNET_INSTALMENT_SEPA') ) ? true : false;
                                 if(in_array($paymentKey, ['NOVALNET_CC', 'NOVALNET_SEPA', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_SEPA', 'NOVALNET_PAYPAL'])) {
                                     $ccFormDetails = $paymentService->getCcFormData($basket, $paymentKey);
                                     $ccCustomFields = $paymentService->getCcFormFields();
@@ -260,7 +260,7 @@ class NovalnetServiceProvider extends ServiceProvider
                                         'nnPaymentProcessUrl' => $paymentService->getProcessPaymentUrl(),
                                         'paymentMopKey'       =>  $paymentKey,
                                         'paymentName'         => $paymentName,
-                                        'guaranteePayment'    => $paymentService->checkGuaranteePaymentDisplayStatus($basket, strtolower($paymentKey)),
+                                        'showBirthday'    => $showBirthday,
                                         'ccFormDetails'       => !empty($ccFormDetails) ? $ccFormDetails : '',
                                         'ccCustomFields'       => !empty($ccCustomFields) ? $ccCustomFields : '',
                                         'customerNo'           => $customerAccount->getAccountContactId(),
