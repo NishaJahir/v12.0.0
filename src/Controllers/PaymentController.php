@@ -191,13 +191,13 @@ class PaymentController extends Controller
         $paymentKey = explode('_', strtolower($requestData['paymentKey']));
         
         // Send DOB to NN server
-        if(in_array($requestData['paymentKey'], ['NOVALNET_GUARANTEED_INVOICE', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA']) && empty($paymentRequestParameters['customer']['billing']['company'])) {
-            $paymentRequestParameters['customer']['birth_date']   =  $birthday;
+        if(in_array($requestData['paymentKey'], ['NOVALNET_GUARANTEED_INVOICE', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA']) && empty($paymentRequestParameters['data']['customer']['billing']['company'])) {
+            $paymentRequestParameters['data']['customer']['birth_date']   =  $birthday;
         }
         // Send Instalment info to NN server
         if (in_array($requestData['paymentKey'], ['NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA'])) {
-            $paymentRequestParameters['instalment']['interval'] = '1m';
-            $paymentRequestParameters['instalment']['cycles'] = $requestData['nnInstalmentCycle'];
+            $paymentRequestParameters['data']['instalment']['interval'] = '1m';
+            $paymentRequestParameters['data']['instalment']['cycles'] = $requestData['nnInstalmentCycle'];
         }
         // Send Spefic payments required paramters to NN server
         if (!empty($requestData[$paymentKey[0].$paymentKey[1].'SelectedToken']) && empty($requestData['newForm'])) {
