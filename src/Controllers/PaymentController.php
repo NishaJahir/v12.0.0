@@ -188,7 +188,18 @@ class PaymentController extends Controller
             $this->paymentService->pushNotification($notificationMessage, 'error', 100);
             return $this->response->redirectTo('checkout');
         }
-        $paymentKey = explode('_', strtolower($requestData['paymentKey']));    
+        $paymentKey = explode('_', strtolower($requestData['paymentKey']));
+        
+        // Send DOB to NN server
+        if(in_array($requestData['paymentKey'], ['NOVALNET_GUARANTEED_INVOICE', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA')) && empty($paymentRequestParameters['customer']['billing']['company'])) {
+            $paymentRequestParameters['customer']['birth_date']   =  $birthday;
+        }
+        // Send Instalment info to NN server
+        if (in_array($requestData['paymentKey'], ['NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA'])) {
+            $paymentRequestParameters['instalment']['interval'] = '1m';
+            $paymentRequestParameters['instalment']['cycles'] = $sessionVal['nn_instalment_cycle'];
+        }
+        // Send Spefic payments required paramters to NN server
         if (!empty($requestData[$paymentKey[0].$paymentKey[1].'SelectedToken']) && empty($requestData['newForm'])) {
             $paymentRequestParameters['data']['transaction']['payment_data']['token'] = $requestData[$paymentKey[0].$paymentKey[1].'SelectedToken'];
         } else {
@@ -200,15 +211,11 @@ class PaymentController extends Controller
             if($requestData['paymentKey'] == 'NOVALNET_CC') {
                 $paymentRequestParameters['data']['transaction']['payment_data']['pan_hash'] = $requestData['nnCcPanHash'];
                 $paymentRequestParameters['data']['transaction']['payment_data']['unique_id'] = $requestData['nnCcUniqueId'];
-            } elseif ($requestData['paymentKey'] == 'NOVALNET_SEPA') { // Build request params for Direct Debit SEPA
+            } elseif (in_array($requestData['paymentKey'], ['NOVALNET_SEPA', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_SEPA'])) { // Build request params for Direct Debit SEPA
                 $paymentRequestParameters['data']['transaction']['payment_data']['bank_account_holder'] = $paymentRequestParameters['data']['customer']['first_name'] . ' ' . $paymentRequestParameters['data']['customer']['last_name'];
                 $paymentRequestParameters['data']['transaction']['payment_data']['iban'] = $requestData['nnSepaIban']; 
-            } elseif ($requestData['paymentKey'] == 'NOVALNET_INSTALMENT_INVOICE') { // Build request params for Instalment Invoice
-                $paymentRequestParameters['data']['instalment']['interval'] = '1m';
-                $paymentRequestParameters['data']['instalment']['cycles'] = $requestData['nnInstalmentCycle'];
-                $paymentRequestParameters['data']['customer']['birth_date']   =  $birthday;
             }
-        } 
+        }
         $this->sessionStorage->getPlugin()->setValue('nnPaymentData', $paymentRequestParameters);
         return $this->response->redirectTo('place-order');
     }
