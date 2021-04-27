@@ -849,6 +849,8 @@ class PaymentService
                         'card_validity' => $requestPaymentData['transaction']['payment_data']['card_expiry_month'] .'/'. $requestPaymentData['transaction']['payment_data']['card_expiry_year']
                         ]);
             case 'novalnet_sepa':
+            case 'novalnet_guaranteed_sepa':
+            case 'novalnet_instalment_sepa':
                 return json_encode([
                         'iban' => $requestPaymentData['transaction']['payment_data']['iban']
                     ]);
