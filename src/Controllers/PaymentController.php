@@ -191,7 +191,7 @@ class PaymentController extends Controller
         $paymentKey = explode('_', strtolower($requestData['paymentKey']));
         
         // Send DOB to NN server
-        if(in_array($requestData['paymentKey'], ['NOVALNET_GUARANTEED_INVOICE', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA')) && empty($paymentRequestParameters['customer']['billing']['company'])) {
+        if(in_array($requestData['paymentKey'], ['NOVALNET_GUARANTEED_INVOICE', 'NOVALNET_GUARANTEED_SEPA', 'NOVALNET_INSTALMENT_INVOICE', 'NOVALNET_INSTALMENT_SEPA']) && empty($paymentRequestParameters['customer']['billing']['company'])) {
             $paymentRequestParameters['customer']['birth_date']   =  $birthday;
         }
         // Send Instalment info to NN server
