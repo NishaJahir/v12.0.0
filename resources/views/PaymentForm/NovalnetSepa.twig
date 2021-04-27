@@ -61,10 +61,10 @@
 						<b><label for="nn_birthday">{{trans("Novalnet::PaymentMethod.birthdateLabel")}}<span class="text-danger">*</span></label></b>
 					</div>
 					<div class="col-sm-4">
-						<input type="tel" name="nn_guarantee_date" id="nn_guarantee_date" maxlength="2" placeholder="{{trans("Novalnet::PaymentMethod.day")}}" class="form-control" autocomplete="off">
+						<input type="tel" name="nnBirthdayDate" id="nnBirthdayDate" maxlength="2" placeholder="{{trans("Novalnet::PaymentMethod.day")}}" class="form-control" autocomplete="off">
 					</div>
 					<div class="col-sm-4">
-					   <select id="nn_guarantee_month" type="text" name="nn_guarantee_month" placeholder="{{trans("Novalnet::PaymentMethod.month")}}" class="form-control">
+					   <select id="nnBirthdayMonth" type="text" name="nnBirthdayMonth" placeholder="{{trans("Novalnet::PaymentMethod.month")}}" class="form-control">
 						   <option value="0">{{trans("Novalnet::PaymentMethod.monthOption")}}</option>
 							{% for i in 1..12 %}
 								<option value="{{i}}">{{ trans("Novalnet::PaymentMethod.month#{i}") }}</option>
@@ -72,7 +72,7 @@
 					   </select>
 					 </div>
 					<div class="col-sm-4 autocomplete">
-						<input type="text" name="nn_guarantee_year" id="nn_guarantee_year" maxlength="4" placeholder="{{trans("Novalnet::PaymentMethod.year")}}" class="form-control" autocomplete="off">
+						<input type="text" name="nnBirthdayYear" id="nnBirthdayYear" maxlength="4" placeholder="{{trans("Novalnet::PaymentMethod.year")}}" class="form-control" autocomplete="off">
 					</div>
 				</div> 
 	        {% endif %}
