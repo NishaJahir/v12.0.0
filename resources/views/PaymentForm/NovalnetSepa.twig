@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 
-		{% if guaranteePayment == 'guarantee' %}
+		{% if showBirthday is not empty %}
                 <div class="row nn_row">
 					<div class="col-sm-12">
 						<b><label for="nn_birthday">{{trans("Novalnet::PaymentMethod.birthdateLabel")}}<span class="text-danger">*</span></label></b>
