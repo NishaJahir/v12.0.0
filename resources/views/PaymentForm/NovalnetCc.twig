@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="{{plugin_path('Novalnet')}}/css/novalnetUi.css">
+<script type="text/javascript" src="https://cdn.novalnet.de/js/v2/NovalnetUtility.js"></script>
+<script src="{{ plugin_path('Novalnet') }}/js/novalnetPaymentForm.js"></script>
+
+<form method="post" id="novalnetCcForm" name="novalnetCcForm" action="{{nnPaymentProcessUrl}}">
+    <input type="hidden" id="paymentKey" name="paymentKey" value="{{paymentMopKey}}" />
+    <div class="modal-header">
+        <h4 class="modal-title nn_payment">{{paymentName}}</h4>
+   </div>
+   <div class="modal-body">
+        <fieldset>      
+                <input type="hidden" name="removalProcessUrl" id="removalProcessUrl" value="{{savedPaymentDetailsRemovalUrl}}">
+                <input type="hidden" name="removedCardDetail" id="removedCardDetail" value="{{trans("Novalnet::PaymentMethod.removedSavedPaymentDetail")}}">
+                <input type="hidden" id="nnCcPanHash" name="nnCcPanHash" />
+                <input type="hidden" id="nnCcUniqueId" name="nnCcUniqueId" />
+                <input type="hidden" id="nnCc3dRedirect" name="nnCc3dRedirect" />
+                <input type="hidden" id="nnCcFormFields" name="nnCcFormFields" value="{{ccCustomFields|escape}}" />
+                <input type="hidden" id="nnCcFormDetails" name="nnCcFormDetails" value="{{ccFormDetails|escape}}" />
+                <div class="row nn_row">
+                    <div class="col-xs-12 col-sm-12">
+                        {% if savedPaymentDetails is not empty and oneClickShopping == 'true' and customerNo != 0 %}
+                        {% for paymentDetail in savedPaymentDetails %}  
+                            <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
+                                <div class="col-xs-12 col-sm-12">
+                                    <input type="radio" name="radioOption" class="nnSavedPaymentDetailToken" value="{{paymentDetail.saveOneTimeToken}}" id="nnPaymentDetailSaved{{loop.index}}">
+                                     <span>
+                                        {% set cardType=paymentDetail.decodedMaskingDetails.card_type|lower %}
+                                         <img src="{{ plugin_path('Novalnet') }}/images/novalnet_{{cardType}}.png" alt="{{paymentDetail.decodedMaskingDetails.card_type}}" title="{{paymentDetail.decodedMaskingDetails.card_type}}">
+                                         {{trans("Novalnet::PaymentMethod.cardNumberEndingDetailsLabel")}} {{paymentDetail.decodedMaskingDetails.card_number}} ({{trans("Novalnet::PaymentMethod.cardExpiresText")}} {{paymentDetail.decodedMaskingDetails.card_validity}})
+                                     </span>
+                                    <button type="button" class="btn btn-danger btnDelete"  onclick="removePaymentDetails('{{paymentDetail.saveOneTimeToken}}')" value="{{paymentDetail.saveOneTimeToken}}"><span class="fa fa-trash-o"></span></button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="newPaymentDetailToggle">
+                             <input type="radio" name="radioOption" id="toggleForm"><strong> {{trans("Novalnet::PaymentMethod.addNewCardDetails")}}</strong><br><br>
+                             <input type="hidden" name="novalnetccSelectedToken" id="novalnetccSelectedToken">
+                             <input type="hidden" name="newForm" id="newForm">
+                        </div>
+                        {% endif %}
+                        <div class="row nn_row" id="newCardDetails">
+                                {% if oneClickShopping == 'true' and customerNo != 0 %}
+                                <div class="col-xs-12 col-sm-12 nnSavePayment">
+                                     <input type="checkbox" name="savePaymentData" id="savePaymentData" class="form-check-input" checked>
+                                     <input type="hidden" name="novalnetSavePaymentData" id="novalnetSavePaymentData">
+                                     <span class="saveCardText">{{trans("Novalnet::PaymentMethod.saveCardData")}}</span>
+                                </div>
+                                {% endif %}
+                                <div class="col-xs-12 col-sm-12 form-horizontal">
+                                    <iframe id="nnIframe" frameborder="0" scrolling="no" width="100%"></iframe>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+        </fieldset>
+    </div>
+
+    <div class="modal-footer nn_footer">
+        <button type="submit" class="btn btn-primary btn-medium" id="novalnetFormBtn" onclick="">
+            <i class="fa fa-arrow-right" aria-hidden="true"> </i>
+            {{ trans("Novalnet::PaymentMethod.submitButtonText") }}
+        </button>
+        <button type="button"  class="btn btn-danger btn-medium" id="novalnetFormCancelBtn" onClick="window.location.reload();">
+            <i class="fa fa-times" aria-hidden="true"></i> Cancel
+        </button> 
+    </div>
+
+</form>
