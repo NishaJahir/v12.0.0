@@ -67,7 +67,7 @@ $(document).ready( function () {
     // For credit card payment form process
     if (paymentName == 'NOVALNET_CC') {
         loadNovalnetCcIframe();
-        jQuery('#novalnetForm').submit( function (e) {
+        jQuery('#novalnetCcForm').submit( function (e) {
                 if($('#nnCcPanHash').val().trim() == '') {
                     NovalnetUtility.getPanHash();
                     e.preventDefault();
@@ -83,8 +83,9 @@ $(document).ready( function () {
             $(this).val(iban);      
         });
 
-        $('#novalnetForm').on('submit',function(){
-          $('#novalnetFormBtn').attr('disabled',true);      
+        $('#novalnetSepaForm, #novalnetCcForm').on('submit',function(){
+          $('#novalnetFormBtn').attr('disabled',true);    
+          $('#novalnetFormCancelBtn').attr('disabled',true);
         });
     }
 });
@@ -103,7 +104,7 @@ function loadNovalnetCcIframe()
             $('#nnCcPanHash').val(result['hash']);
             $('#nnCcUniqueId').val(result['unique_id']);
             $('#nnCc3dRedirect').val(result['do_redirect']);
-            jQuery('#novalnetForm').submit();
+            jQuery('#novalnetCcForm').submit();
             return true;
           },
           on_error: function (result) {
