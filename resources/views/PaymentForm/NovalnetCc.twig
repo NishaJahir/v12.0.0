@@ -22,7 +22,8 @@
                         {% for paymentDetail in savedPaymentDetails %}  
                             <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
                                 <div class="col-xs-12 col-sm-12">
-                                    <input type="radio" name="radioOption" class="nnSavedPaymentDetailToken" value="{{paymentDetail.saveOneTimeToken}}" id="nnPaymentDetailSaved{{loop.index}}">
+                                  <input type="hidden" value="{{paymentDetail.saveOneTimeToken}}">
+                                    <input type="radio" name="radioOption" class="nnSavedPaymentDetailToken" id="nnPaymentDetailSaved{{loop.index}}" value="{{paymentDetail.saveOneTimeToken}}">
                                      <span>
                                         {% set cardType=paymentDetail.decodedMaskingDetails.card_type|lower %}
                                          <img src="{{ plugin_path('Novalnet') }}/images/novalnet_{{cardType}}.png" alt="{{paymentDetail.decodedMaskingDetails.card_type}}" title="{{paymentDetail.decodedMaskingDetails.card_type}}">
