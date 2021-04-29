@@ -40,9 +40,9 @@ $(document).ready( function () {
     if( $("input[name='nn_radio_option']").length > 0  ) { 
       var token = $("input[name='nn_radio_option']:first").val(); 
       if(token){
-          $('#nn_customer_selected_token').val(token);
+          $('#nnCustomerSelectedToken').val(token);
       } else {
-          $('#nn_customer_selected_token').val('');
+          $('#nnCustomerSelectedToken').val('');
       }
            // var token = $("input[name='nn_radio_option']:first").val(); 
             //if(token){
@@ -57,9 +57,9 @@ $(document).ready( function () {
     $("input[name='radioOption']").on('click', function () {
         var tokenValue = $(this).val();
         if(tokenValue){
-            jQuery('#nn_customer_selected_token').val(tokenValue);
+            jQuery('#nnCustomerSelectedToken').val(tokenValue);
         } else {
-            jQuery('#nn_customer_selected_token').val('');
+            jQuery('#nnCustomerSelectedToken').val('');
         }
             //if(tokenValue){
               //  $('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val(tokenValue);
