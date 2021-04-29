@@ -16,11 +16,10 @@
         <div class="row nn_row">
             <div class="col-xs-12 col-sm-12">
                 {% if savedPaymentDetails is not empty and oneClickShopping == 'true' and customerNo != 0 %}
-                {% for paymentDetail in savedPaymentDetails %}  
-		<input type="hidden" name="index" id="index" value="{{loop.index}}">
+                {% for paymentDetail in savedPaymentDetails %}
                     <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
                         <div class="col-xs-12 col-sm-12">
-                            <input type="radio" class="nnSavedPaymentDetailToken" name="radioOption" id="nnPaymentDetailSaved{{loop.index}}">
+                            <input type="radio" class="nnSavedPaymentDetailToken" name="radioOption" id="nnPaymentDetailSaved{{loop.index}}" value="{{paymentDetail.saveOneTimeToken}}">
                             <span>{{trans("Novalnet::PaymentMethod.sepaIbanLabel")}} {{paymentDetail.iban}}</span>
                             <button type="button" class="btn btn-danger btnDelete"  data-saved-radio-id="nnPaymentDetailSaved{{loop.index}}" onclick="removePaymentDetails('{{paymentDetail.saveOneTimeToken}}')" value="{{paymentDetail.saveOneTimeToken}}"><span class="fa fa-trash-o"></span></button>
                         </div>
