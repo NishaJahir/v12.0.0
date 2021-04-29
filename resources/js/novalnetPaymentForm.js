@@ -67,8 +67,11 @@ $(document).ready( function () {
     // For credit card payment form process
     if (paymentName == 'NOVALNET_CC') {
         loadNovalnetCcIframe();
+       console.log('called');
         jQuery('#novalnetCcForm').submit( function (e) {
+         console.log('submit');
                 if($('#nnCcPanHash').val().trim() == '' && $('#newCardDetails').css('display') == 'block') {
+                 console.log($('#nnCcPanHash').val());
                     NovalnetUtility.getPanHash();
                     e.preventDefault();
                     e.stopImmediatePropagation();
@@ -93,6 +96,7 @@ $(document).ready( function () {
 
 function loadNovalnetCcIframe()
 {
+    
      var ccCustomFields = $('#nnCcFormFields').val() != '' ? JSON.parse($('#nnCcFormFields').val()) : null;
      var ccFormDetails= $('#nnCcFormDetails').val() != '' ? JSON.parse($('#nnCcFormDetails').val()) : null;
     
@@ -191,7 +195,7 @@ function loadNovalnetCcIframe()
           test_mode: (ccFormDetails.test_mode !== undefined) ? ccFormDetails.test_mode : '0',
         }
       };
-
+      console.log(requestData);
       NovalnetUtility.createCreditCardForm(requestData);
 }
 
