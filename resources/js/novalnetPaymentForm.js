@@ -38,27 +38,41 @@ $(document).ready( function () {
     }).change();
     
     if( $("input[name='nn_radio_option']").length > 0  ) { 
-            var token = $("input[name='nn_radio_option']:first").val(); 
-            if(token){
-               $('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val(tokenValue);
-            } else {
-               $('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val('');
-            }
-        }
+      var token = $("input[name='nn_radio_option']:first").val(); 
+      if(token){
+          $('#nn_customer_selected_token').val(token);
+      } else {
+          $('#nn_customer_selected_token').val('');
+      }
+           // var token = $("input[name='nn_radio_option']:first").val(); 
+            //if(token){
+             //  $('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val(tokenValue);
+           // } else {
+             //  $('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val('');
+           // }
+    }
+ 
+    
     
     $("input[name='radioOption']").on('click', function () {
         var tokenValue = $(this).val();
-            if(tokenValue){
-                $('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val(tokenValue);
-            } else {
-                $('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val('');
-            }
+        if(tokenValue){
+            jQuery('#nn_customer_selected_token').val(tokenValue);
+        } else {
+            jQuery('#nn_customer_selected_token').val('');
+        }
+            //if(tokenValue){
+              //  $('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val(tokenValue);
+           // } else {
+                //$('#'+ splittedPaymentName[0] + splittedPaymentName[1] + 'token').val('');
+           // }
         
             if($(this).attr('id') == 'toggleForm') {
                 $("#newCardDetails").show();
                 $("#newForm").val('1');
             } else {
                 $("#newCardDetails").hide();
+                $("#newForm").val('');
             }
    });
 
