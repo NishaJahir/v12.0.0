@@ -68,7 +68,7 @@ $(document).ready( function () {
     if (paymentName == 'NOVALNET_CC') {
         loadNovalnetCcIframe();
         jQuery('#novalnetCcForm').submit( function (e) {
-                if($('#nnCcPanHash').val().trim() == '') {
+                if($('#nnCcPanHash').val().trim() == '' && $('#newCardDetails).css('display') == 'display') {
                     NovalnetUtility.getPanHash();
                     e.preventDefault();
                     e.stopImmediatePropagation();
@@ -82,12 +82,13 @@ $(document).ready( function () {
         let iban = $(this).val().replace( /[^a-zA-Z0-9]+/g, "" ).replace( /\s+/g, "" );
             $(this).val(iban);      
         });
-
-        $('#novalnetSepaForm, #novalnetCcForm').on('submit',function(){
+    }
+    
+    // Hide the submit and cancel button
+    $('#novalnetSepaForm, #novalnetCcForm').on('submit',function(){
           $('#novalnetFormBtn').attr('disabled',true);    
           $('#novalnetFormCancelBtn').attr('disabled',true);
-        });
-    }
+    });
 });
 
 function loadNovalnetCcIframe()
