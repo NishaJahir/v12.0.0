@@ -68,7 +68,7 @@ $(document).ready( function () {
     if (paymentName == 'NOVALNET_CC') {
         loadNovalnetCcIframe();
         jQuery('#novalnetCcForm').submit( function (e) {
-                if($('#nnCcPanHash').val().trim() == '' && $('#newCardDetails').css('display') == 'display') {
+                if($('#nnCcPanHash').val().trim() == '' && $('#newCardDetails').css('display') == 'block') {
                     NovalnetUtility.getPanHash();
                     e.preventDefault();
                     e.stopImmediatePropagation();
