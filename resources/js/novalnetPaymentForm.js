@@ -37,8 +37,8 @@ $(document).ready( function () {
          }
     }).change();
     
-    if( $("input[name='nn_radio_option']").length > 0  ) { 
-      var token = $("input[name='nn_radio_option']:first").val(); 
+    if( $("input[name='radioOption']").length > 0  ) { 
+      var token = $("input[name='radioOption']:first").val(); 
       if(token){
           $('#nnCustomerSelectedToken').val(token);
       } else {
