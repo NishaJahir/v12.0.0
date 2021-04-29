@@ -181,6 +181,7 @@ class PaymentController extends Controller
     public function processPayment() 
     {
         $requestData = $this->request->all();
+        $this->getLogger(__METHOD__)->error('post data', $requestData);
         $birthday = sprintf('%4d-%02d-%02d',$requestData['nnBirthdayYear'],$requestData['nnBirthdayMonth'],$requestData['nnBirthdayDate']);
         $paymentRequestParameters = $this->paymentService->getPaymentRequestParameters($this->basketRepository->load(), $requestData['paymentKey']);
         if (empty($paymentRequestParameters['data']['customer']['first_name']) && empty($paymentRequestParameters['data']['customer']['last_name'])) {
@@ -200,8 +201,8 @@ class PaymentController extends Controller
             $paymentRequestParameters['data']['instalment']['cycles'] = $requestData['nnInstalmentCycle'];
         }
         // Send Spefic payments required paramters to NN server
-        if (!empty($requestData[$paymentKey[0].$paymentKey[1].'SelectedToken']) && empty($requestData['newForm'])) {
-            $paymentRequestParameters['data']['transaction']['payment_data']['token'] = $requestData[$paymentKey[0].$paymentKey[1].'SelectedToken'];
+        if (!empty($requestData['nnCustomerSelectedToken']) && empty($requestData['newForm'])) {
+            $paymentRequestParameters['data']['transaction']['payment_data']['token'] = $requestData['nnCustomerSelectedToken'];
         } else {
             // Common for one-click-shopping supported payments
             if ($this->config->get('Novalnet.'. strtolower($requestData['paymentKey']) .'_shopping_type') == true) {
