@@ -22,7 +22,6 @@
                         {% for paymentDetail in savedPaymentDetails %}  
                             <div class="row nn_row" id="remove_{{paymentDetail.saveOneTimeToken}}">
                                 <div class="col-xs-12 col-sm-12">
-                                  <input type="hidden" value="{{paymentDetail.saveOneTimeToken}}">
                                     <input type="radio" name="radioOption" class="nnSavedPaymentDetailToken" id="nnPaymentDetailSaved{{loop.index}}" value="{{paymentDetail.saveOneTimeToken}}">
                                      <span>
                                         {% set cardType=paymentDetail.decodedMaskingDetails.card_type|lower %}
