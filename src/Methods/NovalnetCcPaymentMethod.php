@@ -139,7 +139,7 @@ class NovalnetCcPaymentMethod extends PaymentMethodBaseService
      */
     public function isSwitchableTo(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -149,7 +149,7 @@ class NovalnetCcPaymentMethod extends PaymentMethodBaseService
      */
     public function isSwitchableFrom(): bool
     {
-        return false;
+        return true;
     }
 
     /**
