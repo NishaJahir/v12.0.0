@@ -142,7 +142,7 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodBaseService
      */
     public function isSwitchableTo(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -152,7 +152,7 @@ class NovalnetInvoicePaymentMethod extends PaymentMethodBaseService
      */
     public function isSwitchableFrom(): bool
     {
-        return false;
+        return true;
     }
 
     /**
